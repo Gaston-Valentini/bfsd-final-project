@@ -131,6 +131,10 @@
     background-color: #00ffb3;
 }
 
+.containerDataFormButtonsRedirect {
+    text-align: center;
+}
+
 .containerData a {
     color: var(--green);
     font-weight: 800;
@@ -139,4 +143,18 @@
 
 .containerData a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 800px) {
+    .containerImage {
+        display: none;
+    }
+    .containerData {
+        width: 100%;
+    }
+    .containerDataForm,
+    .containerDataTitles {
+        width: calc(100% - 60px);
+        padding: 0 30px;
+    }
 }
