@@ -1,0 +1,142 @@
+.container {
+    height: 100vh;
+    display: flex;
+}
+
+.containerImage {
+    width: 50%;
+    background-image: url("../../assets/authbg.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-shadow: 0 0 2px black;
+}
+
+.containerImageBackground {
+    height: 100%;
+    width: calc(100% - 100px);
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #2edfaa7f;
+}
+
+.containerImageLogo {
+    font-size: 50px;
+    font-weight: 800;
+}
+
+.containerImageLogo span {
+    font-size: 50px;
+    font-weight: 800;
+    color: black;
+    text-shadow: none;
+}
+
+.containerImageSlogan {
+    font-size: 20px;
+    text-align: center;
+}
+
+.containerData {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    box-shadow: 0 0 5px black;
+}
+
+.containerDataTitles {
+    width: calc(100% - 100px);
+    padding: 0 50px;
+    max-width: 400px;
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.containerDataTitlesSubtitle {
+    font-size: 20px;
+}
+
+.containerDataTitlesTitle {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--green);
+}
+
+.containerDataForm {
+    width: calc(100% - 100px);
+    padding: 0 50px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.containerDataFormInputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.containerDataFormInputsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.containerDataFormInputsSectionTitle {
+    color: var(--grey);
+}
+
+.containerDataFormInputsSectionInput {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--grey);
+}
+.containerDataFormInputsSectionInput:focus {
+    outline: none;
+    border-bottom: 1px solid var(--green);
+}
+
+.containerDataFormTerms {
+    display: flex;
+    gap: 5px;
+}
+
+.containerDataFormTermsCheckbox:hover {
+    cursor: pointer;
+}
+
+.containerDataFormButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.containerDataFormButtonsSubmit {
+    padding: 10px;
+    background-color: var(--green);
+    color: white;
+}
+.containerDataFormButtonsSubmit:hover {
+    cursor: pointer;
+    background-color: #00ffb3;
+}
+
+.containerData a {
+    color: var(--green);
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.containerData a:hover {
+    text-decoration: underline;
+}
