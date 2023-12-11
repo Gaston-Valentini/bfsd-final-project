@@ -28,7 +28,7 @@ const register = async (req, res) => {
 
         const token = jwt.sign({ id: userRegistered._id }, app.get("TOKEN_SECRET"));
 
-        return res.status(200).json({
+        return res.status(201).json({
             success: true,
             message: "Usuario registrado correctamente",
             token,
@@ -38,4 +38,38 @@ const register = async (req, res) => {
     }
 };
 
-export { register };
+const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const userFound = await User.findOne({ email });
+
+        if (!userFound) {
+            return res.status(404).json({
+                success: false,
+                message: "No existe un usuario registrado con ese correo electrónico",
+            });
+        }
+
+        const isPasswordValid = bcrypt.compareSync(password, userFound.password);
+
+        if (!isPasswordValid) {
+            return res.status(401).json({
+                success: false,
+                message: "Contraseña incorrecta",
+            });
+        }
+
+        const token = jwt.sign({ id: userFound._id }, app.get("TOKEN_SECRET"));
+
+        return res.status(200).json({
+            success: true,
+            message: "Inicio de sesión exitoso",
+            token,
+        });
+    } catch (error) {
+        throw new Error(`Error interno en el servidor ${error}`);
+    }
+};
+
+export { register, login };
