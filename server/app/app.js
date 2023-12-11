@@ -6,7 +6,7 @@ dotenv.config();
 import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
-import userRouter from "../views/userView.js";
+import authRouter from "../views/authView.js";
 
 // Settings
 app.set("PORT", process.env.PORT);
@@ -20,6 +20,6 @@ app.use(morgan("dev"));
 app.use(helmet());
 
 // Router
-app.use("/", userRouter);
+app.use("/", authRouter);
 
 export { app };
