@@ -1,4 +1,5 @@
 import style from "./Register.module.css";
+import { Link } from "react-router-dom";
 
 export default function Register() {
     return (
@@ -57,7 +58,7 @@ export default function Register() {
                         <div className={style.containerDataFormButtons}>
                             <div className={style.containerDataFormButtonsSubmit}>Registrarse</div>
                             <div className={style.containerDataFormButtonsRedirect}>
-                                ¿Ya tienes una cuenta? <a href="#">Inicia Sesión</a>
+                                ¿Ya tienes una cuenta? <Link to="/login">Inicia Sesión</Link>
                             </div>
                         </div>
                     </div>

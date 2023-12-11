@@ -5,7 +5,7 @@
 
 .containerImage {
     width: 50%;
-    background-image: url("../../assets/registerbg.jpg");
+    background-image: url("../../assets/loginbg.jpg");
     background-size: cover;
     background-position: center;
     color: white;
