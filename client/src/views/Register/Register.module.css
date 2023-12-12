@@ -105,6 +105,11 @@
     border-bottom: 1px solid var(--green);
 }
 
+.containerDataFormInputsSectionError {
+    font-size: 12px;
+    color: red;
+}
+
 .containerDataFormTerms {
     display: flex;
     gap: 5px;
