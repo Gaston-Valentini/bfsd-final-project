@@ -32,9 +32,8 @@ export default function Login() {
                 const res = await axios.post("http://localhost:3000/login", data);
                 setMessage(res.data.message);
                 setTimeout(() => {
-                    setMessage("");
+                    navigate("/home");
                 }, 2000);
-                navigate("/home");
             } catch (error) {
                 if (error.response.data.message === "Contraseña incorrecta") {
                     setErrors({

@@ -49,9 +49,8 @@ export default function Register() {
                 const res = await axios.post("http://localhost:3000/register", data);
                 setMessage(res.data.message);
                 setTimeout(() => {
-                    setMessage("");
+                    navigate("/home");
                 }, 2000);
-                navigate("/home");
             } catch (error) {
                 setErrors({
                     email: error.response.data.message,
