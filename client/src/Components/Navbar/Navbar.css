@@ -1,0 +1,85 @@
+.navbar {
+    position: fixed;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 2px black;
+}
+
+.navbarLogo {
+    padding-left: 10px;
+    font-size: 20px;
+    font-weight: 800;
+    color: black;
+}
+.navbarLogo span {
+    font-size: 20px;
+    color: var(--green);
+}
+
+.navbarBars {
+    display: none;
+    padding-right: 10px;
+    font-size: 20px;
+}
+.navbarBars:hover {
+    cursor: pointer;
+    color: var(--green);
+}
+
+.navbarLinks {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-right: 10px;
+}
+
+.navbarLinksLink:hover {
+    cursor: pointer;
+    color: var(--green);
+}
+
+.navbarLinksLinkLogout {
+    display: none;
+}
+.navbarLinksLinkLogout:hover {
+    cursor: pointer;
+    color: var(--green);
+}
+
+.navbarLinksLinkIcon {
+    font-size: 20px;
+}
+
+@media (max-width: 500px) {
+    .navbarBars {
+        display: flex;
+    }
+    .navbarLinks {
+        position: absolute;
+        top: 40px;
+        height: calc(100vh - 40px);
+        left: 100vw;
+        width: 100vw;
+        padding: 10px 0;
+        flex-direction: column;
+        gap: 10px;
+        background-color: var(--transparentGreen);
+        transition: 0.3s;
+    }
+    .navbarBarsActive {
+        left: 0px;
+    }
+    .navbarLinksLinkLogout {
+        display: flex;
+    }
+    .navbarLinksLinkIcon {
+        display: none;
+    }
+    .navbarLinksLink:hover,
+    .navbarLinksLinkLogout:hover {
+        color: black;
+    }
+}

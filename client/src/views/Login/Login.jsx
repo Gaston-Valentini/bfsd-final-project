@@ -1,10 +1,11 @@
 import style from "./Login.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { validateField } from "../../validations/validateField";
 
 export default function Login() {
+    const navigate = useNavigate();
     const [data, setData] = useState({});
     const [errors, setErrors] = useState({});
     const [message, setMessage] = useState("");
@@ -33,6 +34,7 @@ export default function Login() {
                 setTimeout(() => {
                     setMessage("");
                 }, 2000);
+                navigate("/home");
             } catch (error) {
                 if (error.response.data.message === "Contraseña incorrecta") {
                     setErrors({

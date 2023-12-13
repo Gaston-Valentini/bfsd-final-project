@@ -116,21 +116,6 @@
     color: red;
 }
 
-.containerDataFormTerms {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.containerDataFormTermsText {
-    display: flex;
-    gap: 5px;
-}
-
-.containerDataFormTermsCheckbox:hover {
-    cursor: pointer;
-}
-
 .containerDataFormButtons {
     display: flex;
     flex-direction: column;

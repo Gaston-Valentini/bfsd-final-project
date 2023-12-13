@@ -1,10 +1,11 @@
 import style from "./Register.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { validateField } from "../../validations/validateField";
 
 export default function Register() {
+    const navigate = useNavigate();
     const [data, setData] = useState({});
     const [errors, setErrors] = useState({});
     const [terms, setTerms] = useState(false);
@@ -50,6 +51,7 @@ export default function Register() {
                 setTimeout(() => {
                     setMessage("");
                 }, 2000);
+                navigate("/home");
             } catch (error) {
                 setErrors({
                     email: error.response.data.message,
