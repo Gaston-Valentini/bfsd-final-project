@@ -1,12 +1,14 @@
 import style from "./Register.module.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 import { validateField } from "../../validations/validateField";
 
 export default function Register() {
     const [data, setData] = useState({});
     const [errors, setErrors] = useState({});
     const [terms, setTerms] = useState(false);
+    const [message, setMessage] = useState("");
 
     const onInput = (e) => {
         const { name, value } = e.target;
@@ -42,9 +44,22 @@ export default function Register() {
 
     const onSubmit = async () => {
         if (Object.values(errors).every((error) => !error) && Object.keys(data).length === 6 && terms === true) {
-            console.log("Enviando datos:", data);
+            try {
+                const res = await axios.post("http://localhost:3000/register", data);
+                setMessage(res.data.message);
+                setTimeout(() => {
+                    setMessage("");
+                }, 2000);
+            } catch (error) {
+                setErrors({
+                    email: error.response.data.message,
+                });
+            }
         } else {
-            console.log("El formulario tiene errores o campos incompletos");
+            setMessage("El formulario tiene errores o campos incompletos");
+            setTimeout(() => {
+                setMessage("");
+            }, 5000);
         }
     };
 
@@ -68,6 +83,7 @@ export default function Register() {
                     </div>
                 </div>
                 <div className={style.containerDataForm}>
+                    <div className={style.containerDataFormMessage}>{message}</div>
                     <div className={style.containerDataFormInputs}>
                         <div className={style.containerDataFormInputsSection}>
                             <div className={style.containerDataFormInputsSectionTitle}>Nombre</div>

@@ -46,7 +46,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
     box-shadow: 0 0 5px black;
 }
 
@@ -76,7 +75,14 @@
     max-width: 400px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
+}
+
+.containerDataFormMessage {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: 800;
+    color: var(--grey);
 }
 
 .containerDataFormInputs {
@@ -165,8 +171,8 @@
     }
     .containerDataForm,
     .containerDataTitles {
-        width: calc(100% - 60px);
-        padding: 0 30px;
+        width: calc(100% - 40px);
+        padding: 0 20px;
     }
 }
 
@@ -174,15 +180,10 @@
     .container {
         height: auto;
     }
-    .containerImage {
-        display: none;
+    .containerDataTitlesTitle {
+        padding-top: 30px;
     }
-    .containerData {
-        width: 100%;
-    }
-    .containerDataForm,
-    .containerDataTitles {
-        width: calc(100% - 60px);
-        padding: 20px;
+    .containerDataFormButtonsRedirect {
+        padding-bottom: 30px;
     }
 }
