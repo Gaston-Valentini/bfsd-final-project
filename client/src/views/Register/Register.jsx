@@ -1,6 +1,6 @@
 import style from "./Register.module.css";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { validateField } from "../../validations/validateField";
 
 export default function Register() {
@@ -47,10 +47,6 @@ export default function Register() {
             console.log("El formulario tiene errores o campos incompletos");
         }
     };
-
-    useEffect(() => {
-        console.log(errors.terms);
-    }, [errors.terms]);
 
     return (
         <div className={style.container}>

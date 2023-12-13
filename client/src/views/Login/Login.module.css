@@ -105,13 +105,9 @@
     border-bottom: 1px solid var(--green);
 }
 
-.containerDataFormTerms {
-    display: flex;
-    gap: 5px;
-}
-
-.containerDataFormTermsCheckbox:hover {
-    cursor: pointer;
+.containerDataFormInputsSectionError {
+    font-size: 10px;
+    color: red;
 }
 
 .containerDataFormButtons {
