@@ -106,11 +106,17 @@
 }
 
 .containerDataFormInputsSectionError {
-    font-size: 12px;
+    font-size: 10px;
     color: red;
 }
 
 .containerDataFormTerms {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.containerDataFormTermsText {
     display: flex;
     gap: 5px;
 }
@@ -161,5 +167,22 @@
     .containerDataTitles {
         width: calc(100% - 60px);
         padding: 0 30px;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        height: auto;
+    }
+    .containerImage {
+        display: none;
+    }
+    .containerData {
+        width: 100%;
+    }
+    .containerDataForm,
+    .containerDataTitles {
+        width: calc(100% - 60px);
+        padding: 20px;
     }
 }

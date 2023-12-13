@@ -140,9 +140,11 @@ export default function Register() {
                         </div>
                     </div>
                     <div className={style.containerDataFormTerms}>
-                        <input className={style.containerDataFormTermsCheckbox} type="checkbox" onClick={onTerms} />{" "}
                         <span className={style.containerDataFormTermsText}>
-                            He leído y acepto los <a href="#">Términos y Condiciones</a>
+                            <input type="checkbox" onClick={onTerms} />
+                            <div>
+                                He leído y acepto los <a href="#">Términos y Condiciones</a>
+                            </div>
                         </span>
                         <span className={style.containerDataFormInputsSectionError}>{errors.terms}</span>
                     </div>
