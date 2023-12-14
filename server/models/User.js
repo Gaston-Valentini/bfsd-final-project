@@ -23,13 +23,29 @@ const User = new Schema(
             type: String,
             required: true,
         },
-        phone: Number,
-        birthday: Date,
-        sport: String,
-        image: String,
-        ubication: String,
+        phone: {
+            type: String,
+            default: "No especificado",
+        },
+        birthday: {
+            type: String,
+            default: "No especificado",
+        },
+        sport: {
+            type: String,
+            default: "No especificado",
+        },
+        image: {
+            type: String,
+            default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+        },
+        ubication: {
+            type: String,
+            default: "No especificado",
+        },
         biography: {
             type: String,
+            default: "Sin descripción",
             maxlength: 500,
         },
         friends: [

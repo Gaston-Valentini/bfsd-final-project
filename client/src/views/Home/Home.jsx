@@ -1,5 +1,5 @@
 import style from "./Home.module.css";
-import Navbar from "../../Components/Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import Publicate from "../../components/Publicate/Publicate";
 
 export default function Home() {
