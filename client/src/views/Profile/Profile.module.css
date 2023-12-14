@@ -1,0 +1,88 @@
+.container {
+    min-height: calc(100vh - 80px);
+    padding: 60px 20px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    background-color: var(--lightGrey);
+}
+
+.profile {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.profileData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.profileDataImage {
+    height: 100px;
+    width: 100px;
+}
+
+.profileDataImage img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.profileDataNickname {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.profileTitle {
+    font-size: 20px;
+    color: var(--green);
+}
+
+.profileForm {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.profileFormSection {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.profileFormSectionInput {
+    width: calc(100% - 20px);
+    padding: 10px;
+    background-color: var(--lightGrey);
+    border: none;
+    border-radius: 5px;
+}
+
+.profileFormSectionInput:focus {
+    background-color: var(--grey);
+    outline: none;
+}
+
+.profileFormSection textarea {
+    height: 100px;
+    resize: none;
+}
+
+.profileSave {
+    align-self: flex-end;
+    width: max-content;
+    padding: 10px;
+    background-color: var(--green);
+    border-radius: 5px;
+}
+
+.profileSave:hover {
+    cursor: pointer;
+    background-color: var(--lightGreen);
+}
