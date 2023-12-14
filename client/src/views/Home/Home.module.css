@@ -1,0 +1,7 @@
+.container {
+    min-height: calc(100vh - 80px);
+    padding: 60px 20px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: var(--lightGrey);
+}

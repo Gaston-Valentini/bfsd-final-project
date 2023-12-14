@@ -130,7 +130,7 @@
 }
 .containerDataFormButtonsSubmit:hover {
     cursor: pointer;
-    background-color: #00ffb3;
+    background-color: var(--lightGreen);
 }
 
 .containerDataFormButtonsRedirect {

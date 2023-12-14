@@ -1,0 +1,93 @@
+.container {
+    height: fit-content;
+    max-width: 500px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.containerData {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+}
+
+.containerDataImage {
+    height: 50px;
+    width: 50px;
+}
+
+.containerDataImage img {
+    height: 100%;
+    width: 100%;
+    border-radius: 30px;
+    object-fit: cover;
+}
+
+.containerDataText {
+    height: 100%;
+    width: calc(100% - 90px);
+    padding-left: 20px;
+    border: none;
+    background-color: var(--lightGrey);
+    border-radius: 30px;
+}
+
+.containerDataText:focus {
+    outline: none;
+    background-color: var(--grey);
+}
+
+hr {
+    border: 1px solid var(--grey);
+}
+
+.containerAttachments {
+    display: flex;
+    justify-content: space-between;
+}
+
+.containerAttachmentsFile,
+.containerAttachmentsSubmit {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.containerAttachmentsSubmit {
+    background-color: var(--green);
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.containerAttachmentsSubmit:hover {
+    cursor: pointer;
+    background-color: var(--lightGreen);
+}
+
+.containerAttachmentsFile:hover {
+    cursor: pointer;
+    color: var(--green);
+}
+
+@media (max-width: 1300px) {
+    .containerAttachments {
+        gap: 10px;
+    }
+    .containerAttachmentsFile {
+        background-color: var(--lightGrey);
+        padding: 10px;
+        border-radius: 30px;
+    }
+    .containerAttachmentsFile:hover {
+        background-color: var(--grey);
+        color: black;
+    }
+    .containerAttachmentsFileText,
+    .containerAttachmentsSubmitText {
+        display: none;
+    }
+}
