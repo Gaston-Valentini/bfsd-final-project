@@ -7,6 +7,7 @@ import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
 import authRouter from "../views/authView.js";
+import userRouter from "../views/userView.js";
 
 // Settings
 app.set("PORT", process.env.PORT);
@@ -21,5 +22,6 @@ app.use(helmet());
 
 // Router
 app.use("/", authRouter);
+app.use("/user", userRouter);
 
 export { app };
