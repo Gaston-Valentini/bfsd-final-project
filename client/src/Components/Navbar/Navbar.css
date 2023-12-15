@@ -37,6 +37,11 @@
     padding-right: 10px;
 }
 
+.navbarLinksLink {
+    text-decoration: none;
+    color: black;
+}
+
 .navbarLinksLink:hover {
     cursor: pointer;
     color: var(--green);
