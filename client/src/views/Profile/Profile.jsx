@@ -1,12 +1,15 @@
 import style from "./Profile.module.css";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 
 export default function Profile() {
+    const navigate = useNavigate();
     const [token, setToken] = useState("");
     const [bio, setBio] = useState(0);
     const [user, setUser] = useState({});
+    const [image, setImage] = useState();
 
     const onBio = (e) => {
         setBio(e.target.value.length);
@@ -19,6 +22,23 @@ export default function Profile() {
         }));
     };
 
+    const uploadImage = async () => {
+        const formData = new FormData();
+        formData.append("file", image);
+        formData.append("upload_preset", "nhkcnosu");
+        formData.append("api_key", "548415732373855");
+
+        const res = await axios.post("https://api.cloudinary.com/v1_1/dmltmuab5/image/upload", formData);
+        user.image = res.data.secure_url;
+    };
+
+    const onSave = async () => {
+        await axios.put("http://localhost:3000/user/updateUser", user, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        navigate("/home");
+    };
+
     useEffect(() => {
         setToken(localStorage.getItem("token"));
         const getUserData = async () => {
@@ -29,10 +49,6 @@ export default function Profile() {
         };
         getUserData();
     }, [token]);
-
-    useEffect(() => {
-        console.log(user);
-    }, [user]);
 
     return (
         <div>
@@ -103,7 +119,14 @@ export default function Profile() {
                         </div>
                         <div className={style.profileFormSection}>
                             <div className={style.profileFormSectionTitle}>Foto de perfil</div>
-                            <input className={style.profileFormSectionInput} type="file" />
+                            <input
+                                className={style.profileFormSectionInput}
+                                type="file"
+                                readOnly={false}
+                                onChange={(e) => {
+                                    setImage(e.target.files[0]);
+                                }}
+                            />
                         </div>
                         <div className={style.profileFormSection}>
                             <div className={style.profileFormSectionTitle}>Ubicación</div>
@@ -128,7 +151,15 @@ export default function Profile() {
                             />
                         </div>
                     </div>
-                    <div className={style.profileSave}>Guardar</div>
+                    <div
+                        className={style.profileSave}
+                        onClick={async () => {
+                            await uploadImage();
+                            onSave();
+                        }}
+                    >
+                        Guardar
+                    </div>
                 </div>
             </div>
         </div>
