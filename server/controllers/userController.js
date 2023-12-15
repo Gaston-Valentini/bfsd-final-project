@@ -14,4 +14,19 @@ const getUser = async (req, res) => {
     }
 };
 
-export { getUser };
+const updateUser = async (req, res) => {
+    try {
+        const { id } = req.user;
+
+        await User.findByIdAndUpdate(id, req.body);
+
+        return res.status(200).json({
+            success: true,
+            message: "Datos del usuario actualizados.",
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
+export { getUser, updateUser };
