@@ -31,6 +31,7 @@ export default function Login() {
             try {
                 const res = await axios.post("http://localhost:3000/login", data);
                 setMessage(res.data.message);
+                localStorage.setItem("token", res.data.token);
                 setTimeout(() => {
                     navigate("/home");
                 }, 2000);
