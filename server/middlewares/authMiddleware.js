@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import app from "../app/app.js";
+import { app } from "../app/app.js";
 
 function authMiddleware(req, res, next) {
     const token = req.headers.authorization;
@@ -11,7 +11,9 @@ function authMiddleware(req, res, next) {
         });
     }
 
-    jwt.verify(token, app.get("TOKEN_SECRET"), (err, decoded) => {
+    const newToken = token.split(" ");
+
+    jwt.verify(newToken[1], app.get("TOKEN_SECRET"), (err, decoded) => {
         if (err) {
             return res.status(401).json({
                 success: false,
