@@ -1,38 +1,71 @@
 import style from "./Publicate.module.css";
-import { FaRegImage, FaVideo, FaPaperclip } from "react-icons/fa6";
-import { AiFillAudio } from "react-icons/ai";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { FaRegImage } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa";
 
-export default function Publicate() {
+export default function Publicate({ user, token }) {
+    const [post, setPost] = useState({});
+    const [image, setImage] = useState({});
+
+    const onInput = (e, name) => {
+        setPost((prevState) => ({
+            ...prevState,
+            [name]: e.target.value,
+        }));
+    };
+
+    const uploadImage = async () => {
+        const formData = new FormData();
+        formData.append("file", image);
+        formData.append("upload_preset", "nhkcnosu");
+        formData.append("api_key", "548415732373855");
+
+        const res = await axios.post("https://api.cloudinary.com/v1_1/dmltmuab5/image/upload", formData);
+        post.image = res.data.secure_url;
+    };
+
+    const onSave = async () => {
+        await axios.post("http://localhost:3000/post/createPost", post, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+    };
+
+    useEffect(() => {
+        console.log(post);
+    }, [post]);
+
     return (
         <div className={style.container}>
             <div className={style.containerData}>
                 <div className={style.containerDataImage}>
-                    <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                    <img src={user.image} />
                 </div>
-                <input className={style.containerDataText} placeholder="En que estás pensando..."></input>
+                <input
+                    className={style.containerDataText}
+                    placeholder="En que estás pensando..."
+                    onChange={(e) => onInput(e, "content")}
+                ></input>
             </div>
             <hr></hr>
-            <div className={style.containerAttachments}>
-                <div className={style.containerAttachmentsFile}>
+            <div className={style.containerImage}>
+                <div className={style.containerImageFile}>
                     <FaRegImage />
-                    <div className={style.containerAttachmentsFileText}>Image</div>
+                    <input
+                        className={style.containerImageSubmitFile}
+                        type="file"
+                        onChange={(e) => setImage(e.target.files[0])}
+                    />
                 </div>
-                <div className={style.containerAttachmentsFile}>
-                    <FaVideo />
-                    <div className={style.containerAttachmentsFileText}>Video</div>
-                </div>
-                <div className={style.containerAttachmentsFile}>
-                    <FaPaperclip />
-                    <div className={style.containerAttachmentsFileText}>Archivo</div>
-                </div>
-                <div className={style.containerAttachmentsFile}>
-                    <AiFillAudio />
-                    <div className={style.containerAttachmentsFileText}>Audio</div>
-                </div>
-                <div className={style.containerAttachmentsSubmit}>
+                <div
+                    className={style.containerImageSubmit}
+                    onClick={async () => {
+                        await uploadImage();
+                        onSave();
+                    }}
+                >
                     <FaPaperPlane />
-                    <div className={style.containerAttachmentsSubmitText}>PUBLICAR</div>
+                    <div className={style.containerImageSubmitText}>PUBLICAR</div>
                 </div>
             </div>
         </div>
