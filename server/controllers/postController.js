@@ -15,11 +15,11 @@ const createPost = async (req, res) => {
     }
 };
 
-const getPosts = async (req, res) => {
+const getUserPosts = async (req, res) => {
     try {
         const { id } = req.user;
 
-        const posts = await Post.find({ user: id });
+        const posts = await Post.find({ user: id }).populate("user");
 
         return res.status(200).json({
             success: true,
@@ -31,4 +31,4 @@ const getPosts = async (req, res) => {
     }
 };
 
-export { createPost, getPosts };
+export { createPost, getUserPosts };

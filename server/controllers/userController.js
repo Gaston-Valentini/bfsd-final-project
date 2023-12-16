@@ -14,6 +14,21 @@ const getUser = async (req, res) => {
     }
 };
 
+const getUserById = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const userFound = await User.findById(id);
+        return res.status(200).json({
+            success: true,
+            userFound,
+            id,
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
 const updateUser = async (req, res) => {
     try {
         const { id } = req.user;
@@ -29,4 +44,4 @@ const updateUser = async (req, res) => {
     }
 };
 
-export { getUser, updateUser };
+export { getUser, getUserById, updateUser };
