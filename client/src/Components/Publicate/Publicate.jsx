@@ -31,10 +31,6 @@ export default function Publicate({ user, token }) {
         });
     };
 
-    useEffect(() => {
-        console.log(post);
-    }, [post]);
-
     return (
         <div className={style.container}>
             <div className={style.containerData}>

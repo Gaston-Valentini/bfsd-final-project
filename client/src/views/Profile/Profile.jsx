@@ -9,7 +9,7 @@ export default function Profile() {
     const [token, setToken] = useState("");
     const [bio, setBio] = useState(0);
     const [user, setUser] = useState({});
-    const [image, setImage] = useState();
+    const [image, setImage] = useState("");
 
     const onBio = (e) => {
         setBio(e.target.value.length);
@@ -154,7 +154,10 @@ export default function Profile() {
                     <div
                         className={style.profileSave}
                         onClick={async () => {
-                            await uploadImage();
+                            if (image !== "") {
+                                await uploadImage();
+                                onSave();
+                            }
                             onSave();
                         }}
                     >

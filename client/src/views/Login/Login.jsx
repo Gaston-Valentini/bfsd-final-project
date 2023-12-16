@@ -10,15 +10,13 @@ export default function Login() {
     const [errors, setErrors] = useState({});
     const [message, setMessage] = useState("");
 
-    const onInput = (e) => {
-        const { name, value } = e.target;
-
+    const onInput = (e, name) => {
         setData((prevState) => ({
             ...prevState,
-            [name]: value,
+            [name]: e.target.value,
         }));
 
-        const isValid = validateField(name, value, data);
+        const isValid = validateField(name, e.target.value, data);
 
         setErrors((prevState) => ({
             ...prevState,
@@ -83,7 +81,7 @@ export default function Login() {
                                 maxLength={50}
                                 type="email"
                                 name="email"
-                                onBlur={onInput}
+                                onBlur={(e) => onInput(e, "email")}
                             />
                             <span className={style.containerDataFormInputsSectionError}>{errors.email}</span>
                         </div>
