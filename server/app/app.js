@@ -8,6 +8,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import authRouter from "../views/authView.js";
 import userRouter from "../views/userView.js";
+import postRouter from "../views/postView.js";
 
 // Settings
 app.set("PORT", process.env.PORT);
@@ -23,5 +24,6 @@ app.use(helmet());
 // Router
 app.use("/", authRouter);
 app.use("/user", userRouter);
+app.use("/post", postRouter);
 
 export { app };
