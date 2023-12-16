@@ -15,4 +15,20 @@ const createPost = async (req, res) => {
     }
 };
 
-export { createPost };
+const getPosts = async (req, res) => {
+    try {
+        const { id } = req.user;
+
+        const posts = await Post.find({ user: id });
+
+        return res.status(200).json({
+            success: true,
+            message: "Publicaciones del usuario",
+            posts,
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
+export { createPost, getPosts };
