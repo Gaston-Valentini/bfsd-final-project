@@ -25,6 +25,7 @@
     height: 100%;
     width: 100%;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .containerUserNickname {
@@ -59,8 +60,7 @@
     font-size: 20px;
     color: var(--grey);
 }
-.containerPostStatsSectionLike:hover,
-.containerPostStatsSectionComment:hover {
+.containerPostStatsSectionLike:hover {
     cursor: pointer;
     color: var(--green);
 }
@@ -79,7 +79,7 @@
 }
 
 .containerComment input {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 10px;
     background-color: var(--lightGrey);
     border: none;

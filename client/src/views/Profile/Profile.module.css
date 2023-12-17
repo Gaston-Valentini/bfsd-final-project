@@ -37,12 +37,12 @@
 
 .profileDataNickname {
     font-size: 20px;
-    font-weight: 800;
 }
 
 .profileTitle,
 .postsTitle {
     font-size: 20px;
+    font-weight: 800;
     color: var(--green);
 }
 
@@ -98,4 +98,10 @@
     padding: 20px;
     background-color: white;
     border-radius: 10px;
+}
+
+.postsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
