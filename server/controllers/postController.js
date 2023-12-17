@@ -15,6 +15,20 @@ const createPost = async (req, res) => {
     }
 };
 
+const getPostById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const post = await Post.findById(id);
+
+        return res.status(201).json({
+            success: true,
+            post,
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
 const getUserPosts = async (req, res) => {
     try {
         const { id } = req.user;
@@ -59,4 +73,4 @@ const toggleLike = async (req, res) => {
     }
 };
 
-export { createPost, getUserPosts, toggleLike };
+export { createPost, getPostById, getUserPosts, toggleLike };
