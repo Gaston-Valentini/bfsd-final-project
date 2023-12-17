@@ -31,4 +31,26 @@ const getUserPosts = async (req, res) => {
     }
 };
 
-export { createPost, getUserPosts };
+const like = async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const userId = req.user.id;
+
+        const post = await Post.findById(postId);
+        post.likes.push({
+            user: userId,
+        });
+
+        const likedPost = await post.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Me gusta añadido",
+            likedPost,
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
+export { createPost, getUserPosts, like };
