@@ -11,13 +11,15 @@ export default function Register() {
     const [terms, setTerms] = useState(false);
     const [message, setMessage] = useState("");
 
-    const onInput = (e, name) => {
+    const onInput = (e) => {
+        const { name, value } = e.target;
+
         setData((prevState) => ({
             ...prevState,
-            [name]: e.target.value,
+            [name]: value,
         }));
 
-        const isValid = validateField(name, e.target.value, data);
+        const isValid = validateField(name, value, data);
 
         setErrors((prevState) => ({
             ...prevState,
@@ -92,7 +94,7 @@ export default function Register() {
                                 maxLength={20}
                                 type="text"
                                 name="name"
-                                onBlur={(e) => onInput(e, "name")}
+                                onBlur={onInput}
                             />
                             <span className={style.containerDataFormInputsSectionError}>{errors.name}</span>
                         </div>
@@ -103,7 +105,7 @@ export default function Register() {
                                 maxLength={20}
                                 type="text"
                                 name="surname"
-                                onBlur={(e) => onInput(e, "surname")}
+                                onBlur={onInput}
                             />
                             <span className={style.containerDataFormInputsSectionError}>{errors.surname}</span>
                         </div>
@@ -114,7 +116,7 @@ export default function Register() {
                                 maxLength={20}
                                 type="text"
                                 name="nickname"
-                                onBlur={(e) => onInput(e, "nickname")}
+                                onBlur={onInput}
                             />
                         </div>
                         <div className={style.containerDataFormInputsSection}>
@@ -124,7 +126,7 @@ export default function Register() {
                                 maxLength={50}
                                 type="email"
                                 name="email"
-                                onBlur={(e) => onInput(e, "email")}
+                                onBlur={onInput}
                             />
                             <span className={style.containerDataFormInputsSectionError}>{errors.email}</span>
                         </div>
@@ -135,7 +137,7 @@ export default function Register() {
                                 maxLength={20}
                                 type="password"
                                 name="password"
-                                onBlur={(e) => onInput(e, "password")}
+                                onBlur={onInput}
                             />
                             <span className={style.containerDataFormInputsSectionError}>{errors.password}</span>
                         </div>
@@ -146,7 +148,7 @@ export default function Register() {
                                 maxLength={20}
                                 type="password"
                                 name="confirmPassword"
-                                onChange={(e) => onInput(e, "confirmPassword")}
+                                onChange={onInput}
                             />
                             <span className={style.containerDataFormInputsSectionError}>{errors.confirmPassword}</span>
                         </div>

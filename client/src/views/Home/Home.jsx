@@ -16,6 +16,7 @@ export default function Home() {
             });
             setUser(res.data.userFound);
         };
+
         getUserData();
     }, [token]);
 
@@ -24,7 +25,7 @@ export default function Home() {
             <Navbar />
             <div className={style.container}>
                 <div></div>
-                <Publicate user={user} token={token} />
+                <Publicate user={user} />
             </div>
         </div>
     );

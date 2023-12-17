@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.containerContent {
+    display: flex;
+    gap: 20px;
+}
+
+.containerContentImage {
+    height: 50px;
+    width: 50px;
+}
+
+.containerContentImage img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.containerContentComment {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.containerContentCommentNickname {
+    font-weight: 800;
+}

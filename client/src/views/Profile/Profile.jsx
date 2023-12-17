@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
+import Post from "../../components/Post/Post";
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ export default function Profile() {
     const [bio, setBio] = useState(0);
     const [user, setUser] = useState({});
     const [image, setImage] = useState("");
+    const [posts, setPosts] = useState([]);
 
     const onBio = (e) => {
         setBio(e.target.value.length);
@@ -47,7 +49,16 @@ export default function Profile() {
             });
             setUser(res.data.userFound);
         };
+
+        const getUserPosts = async () => {
+            const res = await axios.get("http://localhost:3000/post/getUserPosts", {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            setPosts(res.data.posts);
+        };
+
         getUserData();
+        getUserPosts();
     }, [token]);
 
     return (
@@ -162,6 +173,14 @@ export default function Profile() {
                         }}
                     >
                         Guardar
+                    </div>
+                </div>
+                <div className={style.posts}>
+                    <div className={style.postsTitle}>Tus Publicaciones</div>
+                    <div className={style.postsList}>
+                        {posts.map((e) => (
+                            <Post key={e._id} post={e} token={token} />
+                        ))}
                     </div>
                 </div>
             </div>

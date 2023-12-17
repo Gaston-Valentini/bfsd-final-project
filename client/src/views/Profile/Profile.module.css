@@ -1,13 +1,13 @@
 .container {
     min-height: calc(100vh - 80px);
     padding: 60px 20px 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
     gap: 20px;
     background-color: var(--lightGrey);
 }
 
 .profile {
+    height: max-content;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -40,7 +40,8 @@
     font-weight: 800;
 }
 
-.profileTitle {
+.profileTitle,
+.postsTitle {
     font-size: 20px;
     color: var(--green);
 }
@@ -58,7 +59,6 @@
 }
 
 .profileFormSectionInput {
-    width: calc(100% - 20px);
     padding: 10px;
     background-color: var(--lightGrey);
     border: none;
@@ -86,4 +86,16 @@
 .profileSave:hover {
     cursor: pointer;
     background-color: var(--lightGreen);
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.postsTitle {
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
 }

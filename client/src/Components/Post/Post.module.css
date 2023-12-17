@@ -1,0 +1,101 @@
+.container {
+    height: max-content;
+    min-width: 400px;
+    padding: 20px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.containerUser {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.containerUserImage {
+    height: 50px;
+    width: 50px;
+}
+
+.containerUserImage img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.containerUserNickname {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.containerPost {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.containerPostImage img {
+    width: 100%;
+}
+
+.containerPostStats {
+    display: flex;
+    gap: 20px;
+}
+
+.containerPostStatsSection {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.containerPostStatsSectionNumber,
+.containerPostStatsSectionLike,
+.containerPostStatsSectionComment {
+    font-size: 20px;
+    color: var(--grey);
+}
+.containerPostStatsSectionLike:hover,
+.containerPostStatsSectionComment:hover {
+    cursor: pointer;
+    color: var(--green);
+}
+
+.containerComents {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.containerComment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.containerComment input {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--lightGrey);
+    border: none;
+    border-radius: 5px;
+}
+.containerComment input:focus {
+    background-color: var(--grey);
+    outline: none;
+}
+
+.containerComment div {
+    padding: 10px;
+    background-color: var(--green);
+    border-radius: 5px;
+}
+.containerComment div:hover {
+    cursor: pointer;
+    background-color: var(--lightGreen);
+}
