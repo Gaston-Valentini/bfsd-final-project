@@ -46,11 +46,30 @@ const like = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "Me gusta añadido",
-            likedPost,
         });
     } catch (error) {
         throw new Error(`Error interno del servidor: ${error}`);
     }
 };
 
-export { createPost, getUserPosts, like };
+const dislike = async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const userId = req.user.id;
+
+        const post = await Post.findById(postId);
+
+        post.likes = post.likes.filter((like) => like.user.toString() !== userId);
+
+        const unlikedPost = await post.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Me gusta eliminado",
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
+export { createPost, getUserPosts, like, dislike };
