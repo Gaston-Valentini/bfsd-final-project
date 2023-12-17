@@ -31,45 +31,32 @@ const getUserPosts = async (req, res) => {
     }
 };
 
-const like = async (req, res) => {
+const toggleLike = async (req, res) => {
     try {
         const postId = req.params.id;
         const userId = req.user.id;
 
         const post = await Post.findById(postId);
-        post.likes.push({
-            user: userId,
-        });
+        const userLikedIndex = post.likes.findIndex((like) => like.user.toString() === userId);
 
-        const likedPost = await post.save();
-
-        return res.status(200).json({
-            success: true,
-            message: "Me gusta añadido",
-        });
+        if (userLikedIndex !== -1) {
+            post.likes.splice(userLikedIndex, 1);
+            await post.save();
+            return res.status(200).json({
+                success: true,
+                message: "Me gusta eliminado",
+            });
+        } else {
+            post.likes.push({ user: userId });
+            await post.save();
+            return res.status(200).json({
+                success: true,
+                message: "Me gusta añadido",
+            });
+        }
     } catch (error) {
         throw new Error(`Error interno del servidor: ${error}`);
     }
 };
 
-const dislike = async (req, res) => {
-    try {
-        const postId = req.params.id;
-        const userId = req.user.id;
-
-        const post = await Post.findById(postId);
-
-        post.likes = post.likes.filter((like) => like.user.toString() !== userId);
-
-        const unlikedPost = await post.save();
-
-        return res.status(200).json({
-            success: true,
-            message: "Me gusta eliminado",
-        });
-    } catch (error) {
-        throw new Error(`Error interno del servidor: ${error}`);
-    }
-};
-
-export { createPost, getUserPosts, like, dislike };
+export { createPost, getUserPosts, toggleLike };
