@@ -65,6 +65,15 @@
     color: var(--green);
 }
 
+.containerPostStatsSectionLikeLiked {
+    font-size: 20px;
+    color: var(--grey);
+    color: var(--green);
+}
+.containerPostStatsSectionLikeLiked:hover {
+    cursor: pointer;
+}
+
 .containerComents {
     display: flex;
     flex-direction: column;

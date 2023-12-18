@@ -2,10 +2,13 @@ import style from "./Post.module.css";
 import Comment from "../Comment/Comment";
 import { FaDumbbell, FaRegComment } from "react-icons/fa";
 import axios from "axios";
-import { useEffect } from "react";
+import { useState } from "react";
 
 export default function Post({ post, token }) {
     const { _id, image, content, user, likes, comments } = post;
+    const [userLiked, setUserLiked] = useState(false);
+    const [likeStyle, setLikeStyle] = useState(false);
+    const [likesLength, setLikesLength] = useState(likes.length);
 
     const onLike = async () => {
         try {
@@ -16,7 +19,15 @@ export default function Post({ post, token }) {
                     headers: { Authorization: `Bearer ${token}` },
                 }
             );
-            console.log(res);
+            if (!userLiked) {
+                setUserLiked(!userLiked);
+                setLikeStyle(!likeStyle);
+                setLikesLength(likesLength + 1);
+            } else {
+                setUserLiked(!userLiked);
+                setLikeStyle(!likeStyle);
+                setLikesLength(likesLength - 1);
+            }
         } catch (error) {
             console.error("Error al enviar el like:", error);
         }
@@ -37,8 +48,15 @@ export default function Post({ post, token }) {
                     </div>
                     <div className={style.containerPostStats}>
                         <div className={style.containerPostStatsSection}>
-                            <FaDumbbell className={style.containerPostStatsSectionLike} onClick={onLike} />
-                            <div className={style.containerPostStatsSectionNumber}>{likes.length}</div>
+                            <FaDumbbell
+                                className={
+                                    likeStyle === false
+                                        ? style.containerPostStatsSectionLike
+                                        : style.containerPostStatsSectionLikeLiked
+                                }
+                                onClick={onLike}
+                            />
+                            <div className={style.containerPostStatsSectionNumber}>{likesLength}</div>
                         </div>
                         <div className={style.containerPostStatsSection}>
                             <FaRegComment className={style.containerPostStatsSectionComment} />

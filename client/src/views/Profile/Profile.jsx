@@ -179,7 +179,7 @@ export default function Profile() {
                     <div className={style.postsTitle}>Tus Publicaciones</div>
                     <div className={style.postsList}>
                         {posts.map((e) => (
-                            <Post key={e._id} post={e} token={token} />
+                            <Post key={e._id} post={e} token={token} userId={user._id} />
                         ))}
                     </div>
                 </div>
