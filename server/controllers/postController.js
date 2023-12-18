@@ -73,4 +73,20 @@ const toggleLike = async (req, res) => {
     }
 };
 
-export { createPost, getPostById, getUserPosts, toggleLike };
+const comment = async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const userId = req.user.id;
+
+        await Post.findByIdAndUpdate(postId, { $push: { comments: { user: userId, text: req.body.text } } });
+
+        return res.status(200).json({
+            success: true,
+            message: "Comentario añadido",
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
+export { createPost, getPostById, getUserPosts, toggleLike, comment };
