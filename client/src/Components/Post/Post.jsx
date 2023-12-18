@@ -2,13 +2,16 @@ import style from "./Post.module.css";
 import Comment from "../Comment/Comment";
 import { FaDumbbell, FaRegComment } from "react-icons/fa";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function Post({ post, token, userId }) {
     const { _id, image, content, user, likes, comments } = post;
     const [userLiked, setUserLiked] = useState(false);
     const [likeStyle, setLikeStyle] = useState(false);
     const [likesLength, setLikesLength] = useState(likes.length);
+    const [commentsState, setCommentsState] = useState(comments);
+    const [commentLength, setCommentLength] = useState(comments.length);
+    const comment = useRef(null);
 
     const onLike = async () => {
         try {
@@ -31,6 +34,18 @@ export default function Post({ post, token, userId }) {
         } catch (error) {
             console.error("Error al enviar el like:", error);
         }
+    };
+
+    const onComment = async () => {
+        const res = await axios.put(
+            `http://localhost:3000/post/comment/${_id}`,
+            { text: comment.current.value },
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            }
+        );
+        setCommentsState(res.data.updatedPost.comments);
+        setCommentLength(commentLength + 1);
     };
 
     useEffect(() => {
@@ -69,19 +84,19 @@ export default function Post({ post, token, userId }) {
                         </div>
                         <div className={style.containerPostStatsSection}>
                             <FaRegComment className={style.containerPostStatsSectionComment} />
-                            <div className={style.containerPostStatsSectionNumber}>{comments.length}</div>
+                            <div className={style.containerPostStatsSectionNumber}>{commentLength}</div>
                         </div>
                     </div>
                     <div className={style.containerPostContent}>{content}</div>
                 </div>
                 <div className={style.containerComents}>
-                    {comments.map((e) => (
+                    {commentsState.map((e) => (
                         <Comment key={e._id} comment={e} token={token} />
                     ))}
                 </div>
                 <div className={style.containerComment}>
-                    <input placeholder="Deja tu comentario..." />
-                    <div>Comentar</div>
+                    <input placeholder="Deja tu comentario..." ref={comment} />
+                    <div onClick={onComment}>Comentar</div>
                 </div>
             </div>
         </div>

@@ -78,11 +78,16 @@ const comment = async (req, res) => {
         const postId = req.params.id;
         const userId = req.user.id;
 
-        await Post.findByIdAndUpdate(postId, { $push: { comments: { user: userId, text: req.body.text } } });
+        const updatedPost = await Post.findByIdAndUpdate(
+            postId,
+            { $push: { comments: { user: userId, text: req.body.text } } },
+            { new: true }
+        );
 
         return res.status(200).json({
             success: true,
             message: "Comentario añadido",
+            updatedPost,
         });
     } catch (error) {
         throw new Error(`Error interno del servidor: ${error}`);
