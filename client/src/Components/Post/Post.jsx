@@ -1,10 +1,27 @@
 import style from "./Post.module.css";
-import { useEffect } from "react";
 import Comment from "../Comment/Comment";
 import { FaDumbbell, FaRegComment } from "react-icons/fa";
+import axios from "axios";
+import { useEffect } from "react";
 
 export default function Post({ post, token }) {
-    const { image, content, user, likes, comments } = post;
+    const { _id, image, content, user, likes, comments } = post;
+
+    const onLike = async () => {
+        try {
+            const res = await axios.post(
+                `http://localhost:3000/post/toggleLike/${_id}`,
+                {},
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
+            console.log(res);
+        } catch (error) {
+            console.error("Error al enviar el like:", error);
+        }
+    };
+
     return (
         <div>
             <div className={style.container}>
@@ -20,7 +37,7 @@ export default function Post({ post, token }) {
                     </div>
                     <div className={style.containerPostStats}>
                         <div className={style.containerPostStatsSection}>
-                            <FaDumbbell className={style.containerPostStatsSectionLike} />
+                            <FaDumbbell className={style.containerPostStatsSectionLike} onClick={onLike} />
                             <div className={style.containerPostStatsSectionNumber}>{likes.length}</div>
                         </div>
                         <div className={style.containerPostStatsSection}>
@@ -32,7 +49,7 @@ export default function Post({ post, token }) {
                 </div>
                 <div className={style.containerComents}>
                     {comments.map((e) => (
-                        <Comment comment={e} token={token} />
+                        <Comment key={e._id} comment={e} token={token} />
                     ))}
                 </div>
                 <div className={style.containerComment}>
