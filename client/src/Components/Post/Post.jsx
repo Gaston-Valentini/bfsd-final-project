@@ -2,9 +2,9 @@ import style from "./Post.module.css";
 import Comment from "../Comment/Comment";
 import { FaDumbbell, FaRegComment } from "react-icons/fa";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Post({ post, token }) {
+export default function Post({ post, token, userId }) {
     const { _id, image, content, user, likes, comments } = post;
     const [userLiked, setUserLiked] = useState(false);
     const [likeStyle, setLikeStyle] = useState(false);
@@ -32,6 +32,15 @@ export default function Post({ post, token }) {
             console.error("Error al enviar el like:", error);
         }
     };
+
+    useEffect(() => {
+        likes.map((e) => {
+            if (e.user === userId) {
+                setUserLiked(!userLiked);
+                setLikeStyle(!likeStyle);
+            }
+        });
+    }, []);
 
     return (
         <div>
