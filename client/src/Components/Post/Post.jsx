@@ -2,7 +2,8 @@ import style from "./Post.module.css";
 import Comment from "../Comment/Comment";
 import { FaDumbbell, FaRegComment } from "react-icons/fa";
 import axios from "axios";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Fragment } from "react";
+import { Link } from "react-router-dom";
 
 export default function Post({ post, token, userId }) {
     const { _id, image, content, user, likes, comments } = post;
@@ -50,6 +51,8 @@ export default function Post({ post, token, userId }) {
             setCommentsState(res.data.updatedPost.comments);
             setCommentLength(commentLength + 1);
         }
+
+        comment.current.value = "";
     };
 
     useEffect(() => {
@@ -68,12 +71,15 @@ export default function Post({ post, token, userId }) {
                     <div className={style.containerUserImage}>
                         <img src={user.image} />
                     </div>
-                    <div className={style.containerUserNickname}>{user.nickname}</div>
+                    <Link to={`/user/${user._id}`} className={style.containerUserNickname}>
+                        {user.nickname}
+                    </Link>
                 </div>
                 <div className={style.containerPost}>
                     <div className={style.containerPostImage}>
                         <img src={image} />
                     </div>
+                    <div className={style.containerPostContent}>{content}</div>
                     <div className={style.containerPostStats}>
                         <div className={style.containerPostStatsSection}>
                             <FaDumbbell
@@ -91,11 +97,10 @@ export default function Post({ post, token, userId }) {
                             <div className={style.containerPostStatsSectionNumber}>{commentLength}</div>
                         </div>
                     </div>
-                    <div className={style.containerPostContent}>{content}</div>
                 </div>
                 <div className={style.containerComents}>
                     {commentsState.map((e) => (
-                        <>
+                        <Fragment key={e._id}>
                             <Comment
                                 key={e._id}
                                 comment={e}
@@ -106,8 +111,8 @@ export default function Post({ post, token, userId }) {
                                 userId={userId}
                                 token={token}
                             />
-                            <hr></hr>
-                        </>
+                            <hr />
+                        </Fragment>
                     ))}
                 </div>
                 <div className={style.containerComment}>

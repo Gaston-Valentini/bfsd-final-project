@@ -5,3 +5,15 @@
     grid-template-columns: 1fr 1fr 1fr;
     background-color: var(--lightGrey);
 }
+
+.containerPosts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.containerPostsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

@@ -47,11 +47,10 @@ const getUserPosts = async (req, res) => {
 
 const getAllPosts = async (req, res) => {
     try {
-        const posts = await Post.find();
+        const posts = await Post.find().populate("user");
 
         return res.status(200).json({
             success: true,
-            message: "Publicaciones del usuario",
             posts,
         });
     } catch (error) {

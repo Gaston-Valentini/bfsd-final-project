@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import Publicate from "../../components/Publicate/Publicate";
+import Post from "../../components/Post/Post";
 
 export default function Home() {
-    const [user, setUser] = useState({});
     const [token, setToken] = useState("");
+    const [user, setUser] = useState({});
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         setToken(localStorage.getItem("token"));
@@ -17,15 +19,32 @@ export default function Home() {
             setUser(res.data.userFound);
         };
 
+        const getAllPosts = async () => {
+            const res = await axios.get(`http://localhost:3000/post/getAllPosts`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            setPosts(res.data.posts);
+        };
+
         getUserData();
+        getAllPosts();
     }, [token]);
+
+    const reversePosts = [...posts].reverse();
 
     return (
         <div>
             <Navbar />
             <div className={style.container}>
-                <div></div>
-                <Publicate user={user} />
+                <div className={style.containerProfile}></div>
+                <div className={style.containerPosts}>
+                    <Publicate user={user} token={token} />
+                    <div className={style.containerPostsList}>
+                        {reversePosts.map((e) => (
+                            <Post key={e._id} post={e} token={token} userId={user._id} />
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );

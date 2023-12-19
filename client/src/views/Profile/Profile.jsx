@@ -9,7 +9,17 @@ export default function Profile() {
     const navigate = useNavigate();
     const [token, setToken] = useState("");
     const [bio, setBio] = useState(0);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+        name: "",
+        surname: "",
+        email: "",
+        phone: "",
+        birthday: "",
+        sport: "",
+        image: "",
+        ubication: "",
+        biography: "",
+    });
     const [image, setImage] = useState("");
     const [posts, setPosts] = useState([]);
 
@@ -60,6 +70,8 @@ export default function Profile() {
         getUserData();
         getUserPosts();
     }, [token]);
+
+    const reversePosts = [...posts].reverse();
 
     return (
         <div>
@@ -178,7 +190,7 @@ export default function Profile() {
                 <div className={style.posts}>
                     <div className={style.postsTitle}>Tus Publicaciones</div>
                     <div className={style.postsList}>
-                        {posts.map((e) => (
+                        {reversePosts.map((e) => (
                             <Post key={e._id} post={e} token={token} userId={user._id} />
                         ))}
                     </div>
