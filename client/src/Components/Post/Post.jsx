@@ -15,7 +15,7 @@ export default function Post({ post, token, userId }) {
 
     const onLike = async () => {
         try {
-            const res = await axios.post(
+            await axios.post(
                 `http://localhost:3000/post/toggleLike/${_id}`,
                 {},
                 {
@@ -37,15 +37,19 @@ export default function Post({ post, token, userId }) {
     };
 
     const onComment = async () => {
-        const res = await axios.put(
-            `http://localhost:3000/post/comment/${_id}`,
-            { text: comment.current.value },
-            {
-                headers: { Authorization: `Bearer ${token}` },
-            }
-        );
-        setCommentsState(res.data.updatedPost.comments);
-        setCommentLength(commentLength + 1);
+        const trimmedComment = comment.current.value.trim();
+
+        if (trimmedComment !== "") {
+            const res = await axios.put(
+                `http://localhost:3000/post/comment/${_id}`,
+                { text: trimmedComment },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
+            setCommentsState(res.data.updatedPost.comments);
+            setCommentLength(commentLength + 1);
+        }
     };
 
     useEffect(() => {
@@ -91,7 +95,16 @@ export default function Post({ post, token, userId }) {
                 </div>
                 <div className={style.containerComents}>
                     {commentsState.map((e) => (
-                        <Comment key={e._id} comment={e} token={token} />
+                        <Comment
+                            key={e._id}
+                            comment={e}
+                            post={post}
+                            commentLength={commentLength}
+                            setCommentLength={setCommentLength}
+                            commentsState={commentsState}
+                            setCommentsState={setCommentsState}
+                            token={token}
+                        />
                     ))}
                 </div>
                 <div className={style.containerComment}>
