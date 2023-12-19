@@ -94,4 +94,24 @@ const comment = async (req, res) => {
     }
 };
 
-export { createPost, getPostById, getUserPosts, toggleLike, comment };
+const deleteComment = async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const commentId = req.params.commentId;
+        const updatedPost = await Post.findByIdAndUpdate(
+            postId,
+            { $pull: { comments: { _id: commentId } } },
+            { new: true }
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: "Comentario eliminado",
+            updatedPost,
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
+export { createPost, getPostById, getUserPosts, toggleLike, comment, deleteComment };
