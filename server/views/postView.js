@@ -3,6 +3,7 @@ import {
     createPost,
     getPostById,
     getUserPosts,
+    getAllPosts,
     toggleLike,
     comment,
     deleteComment,
@@ -14,6 +15,7 @@ const router = Router();
 router.post("/createPost", authMiddleware, createPost);
 router.get("/getPostById/:id", authMiddleware, getPostById);
 router.get("/getUserPosts", authMiddleware, getUserPosts);
+router.get("/getAllPosts", authMiddleware, getAllPosts);
 router.post("/toggleLike/:id", authMiddleware, toggleLike);
 router.put("/comment/:id", authMiddleware, comment);
 router.delete("/deleteComment/:id/:commentId", authMiddleware, deleteComment);

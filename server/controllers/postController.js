@@ -45,6 +45,20 @@ const getUserPosts = async (req, res) => {
     }
 };
 
+const getAllPosts = async (req, res) => {
+    try {
+        const posts = await Post.find();
+
+        return res.status(200).json({
+            success: true,
+            message: "Publicaciones del usuario",
+            posts,
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
 const toggleLike = async (req, res) => {
     try {
         const postId = req.params.id;
@@ -114,4 +128,4 @@ const deleteComment = async (req, res) => {
     }
 };
 
-export { createPost, getPostById, getUserPosts, toggleLike, comment, deleteComment };
+export { createPost, getPostById, getUserPosts, getAllPosts, toggleLike, comment, deleteComment };
