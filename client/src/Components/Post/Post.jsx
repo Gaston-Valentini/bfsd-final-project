@@ -95,16 +95,19 @@ export default function Post({ post, token, userId }) {
                 </div>
                 <div className={style.containerComents}>
                     {commentsState.map((e) => (
-                        <Comment
-                            key={e._id}
-                            comment={e}
-                            post={post}
-                            commentLength={commentLength}
-                            setCommentLength={setCommentLength}
-                            commentsState={commentsState}
-                            setCommentsState={setCommentsState}
-                            token={token}
-                        />
+                        <>
+                            <Comment
+                                key={e._id}
+                                comment={e}
+                                post={post}
+                                commentLength={commentLength}
+                                setCommentLength={setCommentLength}
+                                setCommentsState={setCommentsState}
+                                userId={userId}
+                                token={token}
+                            />
+                            <hr></hr>
+                        </>
                     ))}
                 </div>
                 <div className={style.containerComment}>

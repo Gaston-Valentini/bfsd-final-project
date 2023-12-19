@@ -1,16 +1,9 @@
 import style from "./Comment.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { FaTrashAlt } from "react-icons/fa";
 
-export default function Comment({
-    comment,
-    post,
-    commentLength,
-    setCommentLength,
-    commentsState,
-    setCommentsState,
-    token,
-}) {
+export default function Comment({ comment, post, commentLength, setCommentLength, setCommentsState, userId, token }) {
     const [user, setUser] = useState({});
 
     const onDelete = async () => {
@@ -39,12 +32,19 @@ export default function Comment({
                     <img src={user.image} />
                 </div>
                 <div className={style.containerContentComment}>
-                    <div className={style.containerContentCommentNickname}>{user.nickname}</div>
-                    <div className={style.containerContentCommentText}>{comment.text}</div>
+                    <div className={style.containerContentCommentWords}>
+                        <div className={style.containerContentCommentWordsNickname}>{user.nickname}</div>
+                        <div className={style.containerContentCommentWordsText}>{comment.text}</div>
+                    </div>
+                    {userId === comment.user ? (
+                        <div className={style.containerContentCommentDelete} onClick={onDelete}>
+                            <FaTrashAlt className={style.containerContentCommentDeleteIcon} />
+                        </div>
+                    ) : (
+                        ""
+                    )}
                 </div>
-                <div onClick={onDelete}>Eliminar</div>
             </div>
-            <hr></hr>
         </div>
     );
 }
