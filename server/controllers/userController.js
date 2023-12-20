@@ -57,4 +57,38 @@ const updateUser = async (req, res) => {
     }
 };
 
-export { getUser, getUserById, getAllUsers, updateUser };
+const follow = async (req, res) => {
+    try {
+        const { id } = req.user;
+        const userId = req.params.id;
+
+        const updatedUser = await User.findByIdAndUpdate(id, { $push: { following: { user: userId } } }, { new: true });
+
+        return res.status(200).json({
+            success: true,
+            message: "Datos del usuario actualizados.",
+            updatedUser,
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
+const unfollow = async (req, res) => {
+    try {
+        const { id } = req.user;
+        const userId = req.params.id;
+
+        const updatedUser = await User.findByIdAndUpdate(id, { $pull: { following: { user: userId } } }, { new: true });
+
+        return res.status(200).json({
+            success: true,
+            message: "Datos del usuario actualizados.",
+            updatedUser,
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
+export { getUser, getUserById, getAllUsers, updateUser, follow, unfollow };

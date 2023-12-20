@@ -48,7 +48,7 @@ const User = new Schema(
             default: "Sin descripción",
             maxlength: 500,
         },
-        friends: [
+        following: [
             {
                 user: {
                     type: Schema.Types.ObjectId,
