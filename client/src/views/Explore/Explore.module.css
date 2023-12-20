@@ -1,0 +1,136 @@
+.container {
+    min-height: calc(100vh - 80px);
+    padding: 60px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    background-color: var(--lightGrey);
+}
+
+.searchbar {
+    width: calc(100% - 40px);
+    max-width: 800px;
+    height: 40px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 50px;
+}
+
+.searchbar:focus {
+    background-color: var(--grey);
+    outline: none;
+}
+
+.sorts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.sortsTitle {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--green);
+}
+
+.sortsList {
+    display: flex;
+    gap: 20px;
+}
+
+.sortsListElement {
+    display: flex;
+    gap: 10px;
+}
+
+.sortsListElementInput:hover {
+    cursor: pointer;
+}
+
+.users {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.usersCard {
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    background-color: white;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.usersCard:hover {
+    cursor: pointer;
+    outline: 1px solid var(--green);
+}
+
+.usersCardImage {
+    height: 50px;
+    width: 50px;
+}
+
+.usersCardImage img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.usersCardData {
+    width: calc(100% - 60px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.usersCardDataText {
+    font-style: italic;
+    color: var(--grey);
+    font-weight: 800;
+}
+
+.usersCardDataTextNickname {
+    font-style: normal;
+    font-weight: 800;
+    color: black;
+}
+
+.usersCardDataFollowYes,
+.usersCardDataFollowNo {
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 50px;
+}
+
+.usersCardDataFollowYes {
+    color: var(--red);
+}
+
+.usersCardDataFollowYes:hover {
+    color: white;
+    background-color: var(--red);
+}
+
+.usersCardDataFollowNo {
+    color: var(--green);
+}
+
+.usersCardDataFollowNo:hover {
+    color: white;
+    background-color: var(--green);
+}
+
+@media (max-width: 450px) {
+    .sortsList {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+}
