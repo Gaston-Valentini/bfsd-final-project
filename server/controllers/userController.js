@@ -29,6 +29,19 @@ const getUserById = async (req, res) => {
     }
 };
 
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+
+        return res.status(200).json({
+            success: true,
+            users,
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
 const updateUser = async (req, res) => {
     try {
         const { id } = req.user;
@@ -44,4 +57,4 @@ const updateUser = async (req, res) => {
     }
 };
 
-export { getUser, getUserById, updateUser };
+export { getUser, getUserById, getAllUsers, updateUser };
