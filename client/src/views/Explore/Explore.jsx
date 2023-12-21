@@ -112,13 +112,15 @@ export default function Explore() {
                 </div>
                 <div className={style.users}>
                     {filteredUsers.map((e) => (
-                        <Link className={style.usersCard} key={e._id}>
+                        <div className={style.usersCard} key={e._id}>
                             <div className={style.usersCardImage}>
                                 <img src={e.image} alt={e.nickname} />
                             </div>
                             <div className={style.usersCardData}>
                                 <p className={style.usersCardDataText}>
-                                    <span className={style.usersCardDataTextNickname}>{e.nickname}</span>
+                                    <Link to={`/user/${e._id}`} className={style.usersCardDataTextNickname}>
+                                        {e.nickname}
+                                    </Link>
                                     <br />
                                     Seguidores: {e.followers.length}
                                 </p>
@@ -140,7 +142,7 @@ export default function Explore() {
                                     )}
                                 </div>
                             </div>
-                        </Link>
+                        </div>
                     ))}
                 </div>
             </div>

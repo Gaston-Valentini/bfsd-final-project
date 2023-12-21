@@ -4,11 +4,12 @@ const createPost = async (req, res) => {
     try {
         const { id } = req.user;
         const { content, image } = req.body;
-        await Post.create({ user: id, content, image });
+        const post = await Post.create({ user: id, content, image });
 
         return res.status(201).json({
             success: true,
             message: "Publicación exitosa",
+            post,
         });
     } catch (error) {
         throw new Error(`Error interno del servidor: ${error}`);
@@ -127,4 +128,20 @@ const deleteComment = async (req, res) => {
     }
 };
 
-export { createPost, getPostById, getUserPosts, getAllPosts, toggleLike, comment, deleteComment };
+const deletePost = async (req, res) => {
+    try {
+        const postId = req.params.id;
+
+        const post = await Post.deleteOne({ _id: postId });
+
+        return res.status(200).json({
+            success: true,
+            message: "Publicación eliminada",
+            post,
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
+export { createPost, getPostById, getUserPosts, getAllPosts, toggleLike, comment, deleteComment, deletePost };

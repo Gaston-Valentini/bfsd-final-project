@@ -38,10 +38,17 @@ export default function Home() {
             <div className={style.container}>
                 <div className={style.containerProfile}></div>
                 <div className={style.containerPosts}>
-                    <Publicate user={user} token={token} />
+                    <Publicate user={user} setPosts={setPosts} token={token} />
                     <div className={style.containerPostsList}>
                         {reversePosts.map((e) => (
-                            <Post key={e._id} post={e} token={token} userId={user._id} />
+                            <Post
+                                key={e._id}
+                                post={e}
+                                posts={posts}
+                                setPosts={setPosts}
+                                token={token}
+                                userId={user._id}
+                            />
                         ))}
                     </div>
                 </div>

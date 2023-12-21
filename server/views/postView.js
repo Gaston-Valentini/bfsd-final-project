@@ -7,6 +7,7 @@ import {
     toggleLike,
     comment,
     deleteComment,
+    deletePost,
 } from "../controllers/postController.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 
@@ -19,5 +20,6 @@ router.get("/getAllPosts", authMiddleware, getAllPosts);
 router.post("/toggleLike/:id", authMiddleware, toggleLike);
 router.put("/comment/:id", authMiddleware, comment);
 router.delete("/deleteComment/:id/:commentId", authMiddleware, deleteComment);
+router.delete("/deletePost/:id", authMiddleware, deletePost);
 
 export default router;

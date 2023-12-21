@@ -4,7 +4,7 @@ import axios from "axios";
 import { FaRegImage } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa";
 
-export default function Publicate({ user, token }) {
+export default function Publicate({ user, setPosts, token }) {
     const [post, setPost] = useState({});
     const [image, setImage] = useState({});
 
@@ -26,9 +26,12 @@ export default function Publicate({ user, token }) {
     };
 
     const onSave = async () => {
-        await axios.post("http://localhost:3000/post/createPost", post, {
-            headers: { Authorization: `Bearer ${token}` },
-        });
+        if (post.content && post.image) {
+            const res = await axios.post("http://localhost:3000/post/createPost", post, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            setPosts((prevState) => [...prevState, res.data.post]);
+        }
     };
 
     return (

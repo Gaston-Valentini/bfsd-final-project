@@ -4,8 +4,9 @@ import { FaDumbbell, FaRegComment } from "react-icons/fa";
 import axios from "axios";
 import { useEffect, useState, useRef, Fragment } from "react";
 import { Link } from "react-router-dom";
+import { getDate } from "../../functions/getDate";
 
-export default function Post({ post, token, userId }) {
+export default function Post({ post, posts, setPosts, token, userId }) {
     const { _id, image, content, user, likes, comments } = post;
     const [userLiked, setUserLiked] = useState(false);
     const [likeStyle, setLikeStyle] = useState(false);
@@ -53,6 +54,20 @@ export default function Post({ post, token, userId }) {
         }
 
         comment.current.value = "";
+    };
+
+    const onDeletePost = async () => {
+        try {
+            await axios.delete(`http://localhost:3000/post/deletePost/${post._id}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            const newPosts = posts.filter((e) => e._id !== post._id);
+
+            setPosts(newPosts);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
@@ -118,6 +133,16 @@ export default function Post({ post, token, userId }) {
                 <div className={style.containerComment}>
                     <input placeholder="Deja tu comentario..." ref={comment} />
                     <div onClick={onComment}>Comentar</div>
+                </div>
+                <div className={style.containerDelete}>
+                    <div className={style.containerDeleteDate}>Publicado el: {getDate(post.createdAt)}</div>
+                    {user._id === userId ? (
+                        <div className={style.containerDeleteButton} onClick={onDeletePost}>
+                            Eliminar
+                        </div>
+                    ) : (
+                        ""
+                    )}
                 </div>
             </div>
         </div>
