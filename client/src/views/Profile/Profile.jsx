@@ -191,7 +191,14 @@ export default function Profile() {
                     <div className={style.postsTitle}>Tus Publicaciones</div>
                     <div className={style.postsList}>
                         {reversePosts.map((e) => (
-                            <Post key={e._id} post={e} token={token} userId={user._id} />
+                            <Post
+                                key={e._id}
+                                post={e}
+                                posts={posts}
+                                setPosts={setPosts}
+                                token={token}
+                                userId={user._id}
+                            />
                         ))}
                     </div>
                 </div>

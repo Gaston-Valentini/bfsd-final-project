@@ -10,6 +10,9 @@ export default function Explore() {
     const [user, setUser] = useState({});
     const [users, setUsers] = useState([]);
     const [search, setSearch] = useState("");
+    const [dateSort, setDateSort] = useState(true);
+    const [alphabetSort, setAlphabetSort] = useState(false);
+    const [followersSort, setFollowersSort] = useState(false);
 
     const getUserData = async () => {
         const res = await axios.get("http://localhost:3000/user/getUser", {
@@ -46,7 +49,6 @@ export default function Explore() {
                 headers: { Authorization: `Bearer ${token}` },
             }
         );
-        console.log(res);
         setUser(res.data.updatedUser);
         setUsers((prevUsers) => {
             const updatedUsers = prevUsers.map((u) =>
@@ -64,7 +66,6 @@ export default function Explore() {
                 headers: { Authorization: `Bearer ${token}` },
             }
         );
-        console.log(res);
         setUser(res.data.updatedUser);
         setUsers((prevUsers) => {
             const updatedUsers = prevUsers.map((u) =>
@@ -72,6 +73,60 @@ export default function Explore() {
             );
             return updatedUsers;
         });
+    };
+
+    const onSort = (e) => {
+        switch (e.target.name) {
+            case "date":
+                setDateSort(true);
+                setAlphabetSort(false);
+                setFollowersSort(false);
+
+                function sortByDate(a, b) {
+                    const createdAtA = new Date(a.createdAt).getTime();
+                    const createdAtB = new Date(b.createdAt).getTime();
+
+                    return createdAtA - createdAtB;
+                }
+
+                users.sort(sortByDate);
+                break;
+            case "alphabet":
+                setDateSort(false);
+                setAlphabetSort(true);
+                setFollowersSort(false);
+
+                function sortByAlphabet(a, b) {
+                    const nicknameA = a.nickname.toLowerCase();
+                    const nicknameB = b.nickname.toLowerCase();
+                    if (nicknameA < nicknameB) {
+                        return -1;
+                    }
+                    if (nicknameA > nicknameB) {
+                        return 1;
+                    }
+                    return 0;
+                }
+
+                users.sort(sortByAlphabet);
+                break;
+            case "followers":
+                setDateSort(false);
+                setAlphabetSort(false);
+                setFollowersSort(true);
+
+                function sortByFollowers(a, b) {
+                    const followersA = a.followers.length;
+                    const followersB = b.followers.length;
+
+                    return followersB - followersA;
+                }
+
+                users.sort(sortByFollowers);
+                break;
+            default:
+                break;
+        }
     };
 
     useEffect(() => {
@@ -98,15 +153,39 @@ export default function Explore() {
                     <div className={style.sortsList}>
                         <div className={style.sortsListElement}>
                             <div className={style.sortsListElementText}>Fecha de registro</div>
-                            <input className={style.sortsListElementInput} type="checkbox" />
+                            <input
+                                className={style.sortsListElementInput}
+                                type="checkbox"
+                                checked={dateSort}
+                                name="date"
+                                onChange={(e) => {
+                                    onSort(e);
+                                }}
+                            />
                         </div>
                         <div className={style.sortsListElement}>
                             <div className={style.sortsListElementText}>Afabéticamente</div>
-                            <input className={style.sortsListElementInput} type="checkbox" />
+                            <input
+                                className={style.sortsListElementInput}
+                                type="checkbox"
+                                checked={alphabetSort}
+                                name="alphabet"
+                                onChange={(e) => {
+                                    onSort(e);
+                                }}
+                            />
                         </div>
                         <div className={style.sortsListElement}>
                             <div className={style.sortsListElementText}>Popularidad</div>
-                            <input className={style.sortsListElementInput} type="checkbox" />
+                            <input
+                                className={style.sortsListElementInput}
+                                type="checkbox"
+                                checked={followersSort}
+                                name="followers"
+                                onChange={(e) => {
+                                    onSort(e);
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
