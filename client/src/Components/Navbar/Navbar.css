@@ -6,7 +6,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    box-shadow: 0 0 2px black;
+    outline: 1px solid var(--green);
 }
 
 .navbarLogo {

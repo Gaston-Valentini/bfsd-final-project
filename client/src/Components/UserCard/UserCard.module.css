@@ -1,0 +1,47 @@
+.container {
+    height: max-content;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.containerHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.containerHeaderImage {
+    height: 100px;
+    width: 100px;
+}
+
+.containerHeaderImage img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.containerHeaderNickname {
+    font-size: 20px;
+}
+
+.containerData {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.containerDataElement {
+    font-weight: 800;
+}
+
+.containerDataElement span {
+    color: var(--grey);
+    font-weight: 800;
+}

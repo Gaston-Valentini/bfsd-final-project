@@ -202,6 +202,8 @@ export default function Explore() {
                                     </Link>
                                     <br />
                                     Seguidores: {e.followers.length}
+                                    <br />
+                                    Seguidos: {e.following.length}
                                 </p>
                                 <div className={style.usersCardDataFollow}>
                                     {isUserFollowing(e._id) ? (

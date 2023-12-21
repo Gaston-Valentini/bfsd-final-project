@@ -3,6 +3,7 @@
     padding: 60px 20px 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
     background-color: var(--lightGrey);
 }
 

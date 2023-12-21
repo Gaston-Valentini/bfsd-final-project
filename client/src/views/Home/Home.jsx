@@ -2,6 +2,7 @@ import style from "./Home.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
+import UserCard from "../../components/UserCard/UserCard";
 import Publicate from "../../components/Publicate/Publicate";
 import Post from "../../components/Post/Post";
 
@@ -36,7 +37,7 @@ export default function Home() {
         <div>
             <Navbar />
             <div className={style.container}>
-                <div className={style.containerProfile}></div>
+                <UserCard user={user} />
                 <div className={style.containerPosts}>
                     <Publicate user={user} setPosts={setPosts} token={token} />
                     <div className={style.containerPostsList}>
