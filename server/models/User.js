@@ -56,6 +56,14 @@ const User = new Schema(
                 },
             },
         ],
+        followers: [
+            {
+                user: {
+                    type: Schema.Types.ObjectId,
+                    ref: "User",
+                },
+            },
+        ],
     },
     { timestamps: true }
 );

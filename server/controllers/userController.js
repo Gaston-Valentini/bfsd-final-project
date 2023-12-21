@@ -60,9 +60,15 @@ const updateUser = async (req, res) => {
 const follow = async (req, res) => {
     try {
         const { id } = req.user;
-        const userId = req.params.id;
+        const userIdToFollow = req.params.id;
 
-        const updatedUser = await User.findByIdAndUpdate(id, { $push: { following: { user: userId } } }, { new: true });
+        const updatedUser = await User.findByIdAndUpdate(
+            id,
+            { $push: { following: { user: userIdToFollow } } },
+            { new: true }
+        );
+
+        await User.findByIdAndUpdate(userIdToFollow, { $push: { followers: { user: id } } }, { new: true });
 
         return res.status(200).json({
             success: true,
@@ -77,9 +83,15 @@ const follow = async (req, res) => {
 const unfollow = async (req, res) => {
     try {
         const { id } = req.user;
-        const userId = req.params.id;
+        const userIdToUnfollow = req.params.id;
 
-        const updatedUser = await User.findByIdAndUpdate(id, { $pull: { following: { user: userId } } }, { new: true });
+        const updatedUser = await User.findByIdAndUpdate(
+            id,
+            { $pull: { following: { user: userIdToUnfollow } } },
+            { new: true }
+        );
+
+        await User.findByIdAndUpdate(userIdToUnfollow, { $pull: { followers: { user: id } } }, { new: true });
 
         return res.status(200).json({
             success: true,
