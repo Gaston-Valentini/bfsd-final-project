@@ -46,6 +46,22 @@ const getUserPosts = async (req, res) => {
     }
 };
 
+const getUserPostsById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const posts = await Post.find({ user: id }).populate("user");
+
+        return res.status(200).json({
+            success: true,
+            message: "Publicaciones del usuario",
+            posts,
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
 const getAllPosts = async (req, res) => {
     try {
         const posts = await Post.find().populate("user");
@@ -144,4 +160,14 @@ const deletePost = async (req, res) => {
     }
 };
 
-export { createPost, getPostById, getUserPosts, getAllPosts, toggleLike, comment, deleteComment, deletePost };
+export {
+    createPost,
+    getPostById,
+    getUserPosts,
+    getUserPostsById,
+    getAllPosts,
+    toggleLike,
+    comment,
+    deleteComment,
+    deletePost,
+};

@@ -2,6 +2,7 @@ import style from "./Comment.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Comment({ comment, post, commentLength, setCommentLength, setCommentsState, userId, token }) {
     const [user, setUser] = useState({});
@@ -33,7 +34,13 @@ export default function Comment({ comment, post, commentLength, setCommentLength
                 </div>
                 <div className={style.containerContentComment}>
                     <div className={style.containerContentCommentWords}>
-                        <div className={style.containerContentCommentWordsNickname}>{user.nickname}</div>
+                        {comment.user !== userId ? (
+                            <Link to={`/user/${user._id}`} className={style.containerContentCommentWordsNickname}>
+                                {user.nickname}
+                            </Link>
+                        ) : (
+                            <div className={style.containerContentCommentWordsNickname}>{user.nickname}</div>
+                        )}
                         <div className={style.containerContentCommentWordsText}>{comment.text}</div>
                     </div>
                     {userId === comment.user ? (

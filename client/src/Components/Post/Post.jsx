@@ -86,9 +86,13 @@ export default function Post({ post, posts, setPosts, token, userId }) {
                     <div className={style.containerUserImage}>
                         <img src={user.image} />
                     </div>
-                    <Link to={`/user/${user._id}`} className={style.containerUserNickname}>
-                        {user.nickname}
-                    </Link>
+                    {user._id !== userId ? ( // <-- Condición añadida aquí
+                        <Link to={`/user/${user._id}`} className={style.containerUserNickname}>
+                            {user.nickname}
+                        </Link>
+                    ) : (
+                        <div className={style.containerUserNickname}>{user.nickname}</div>
+                    )}
                 </div>
                 <div className={style.containerPost}>
                     <div className={style.containerPostImage}>
