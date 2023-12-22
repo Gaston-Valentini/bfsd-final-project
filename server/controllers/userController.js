@@ -4,7 +4,10 @@ const getUser = async (req, res) => {
     try {
         const { id } = req.user;
 
-        const userFound = await User.findById(id);
+        const userFound = await User.findById(id)
+            .populate("following.user", "nickname image")
+            .populate("followers.user", "nickname image");
+
         return res.status(200).json({
             success: true,
             userFound,

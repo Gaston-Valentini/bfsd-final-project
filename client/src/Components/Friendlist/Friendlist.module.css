@@ -1,0 +1,59 @@
+.container {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.containerSection {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.containerSectionTitle {
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+    color: var(--green);
+    background-color: white;
+    border-radius: 10px;
+}
+
+.containerSectionList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.containerSectionListCard {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    background-color: white;
+    border-radius: 10px;
+}
+.containerSectionListCard:hover {
+    cursor: pointer;
+    background-color: var(--green);
+}
+
+.containerSectionListCardImage {
+    height: 50px;
+    width: 50px;
+}
+
+.containerSectionListCardImage img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.containerSectionListCardNickname {
+    font-weight: 800;
+    color: black;
+}

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import Post from "../../components/Post/Post";
+import Friendlist from "../../components/Friendlist/Friendlist";
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -19,6 +20,8 @@ export default function Profile() {
         image: "",
         ubication: "",
         biography: "",
+        following: [],
+        followers: [],
     });
     const [image, setImage] = useState("");
     const [posts, setPosts] = useState([]);
@@ -202,6 +205,7 @@ export default function Profile() {
                         ))}
                     </div>
                 </div>
+                <Friendlist following={user.following} followers={user.followers} />
             </div>
         </div>
     );
