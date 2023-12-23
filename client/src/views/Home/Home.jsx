@@ -9,27 +9,32 @@ import Post from "../../components/Post/Post";
 import { isAuthenticated } from "../../functions/isAuthenticated.js";
 
 export default function Home() {
+    const navigate = useNavigate();
     const [token, setToken] = useState("");
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
-    const navigate = useNavigate();
+
+    // Obtiene los datos del usuario que ha iniciado sesión
+    const getUserData = async () => {
+        const res = await axios.get("http://localhost:3000/user/getUser", {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(res.data.userFound);
+    };
+
+    // Obtiene las publicaciones que se han hecho de todos los usuarios
+    const getAllPosts = async () => {
+        const res = await axios.get(`http://localhost:3000/post/getAllPosts`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        setPosts(res.data.posts);
+    };
+
+    // Ordena los posts del mas reciente al más antiguo
+    const reversePosts = [...posts].reverse();
 
     useEffect(() => {
         setToken(localStorage.getItem("token"));
-        const getUserData = async () => {
-            const res = await axios.get("http://localhost:3000/user/getUser", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            setUser(res.data.userFound);
-        };
-
-        const getAllPosts = async () => {
-            const res = await axios.get(`http://localhost:3000/post/getAllPosts`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            setPosts(res.data.posts);
-        };
-
         getUserData();
         getAllPosts();
     }, [token]);
@@ -39,8 +44,6 @@ export default function Home() {
             navigate("/login");
         }
     }, []);
-
-    const reversePosts = [...posts].reverse();
 
     return (
         <div>

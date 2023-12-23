@@ -1,9 +1,9 @@
 import style from "./Post.module.css";
-import Comment from "../Comment/Comment";
-import { FaDumbbell, FaRegComment } from "react-icons/fa";
-import axios from "axios";
 import { useEffect, useState, useRef, Fragment } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Comment from "../Comment/Comment";
+import { FaDumbbell, FaRegComment } from "react-icons/fa";
 import { getDate } from "../../functions/getDate";
 
 export default function Post({ post, posts, setPosts, token, userId }) {
@@ -15,6 +15,7 @@ export default function Post({ post, posts, setPosts, token, userId }) {
     const [commentLength, setCommentLength] = useState(comments.length);
     const comment = useRef(null);
 
+    // Añade un me gusta al post
     const onLike = async () => {
         try {
             await axios.post(
@@ -38,6 +39,7 @@ export default function Post({ post, posts, setPosts, token, userId }) {
         }
     };
 
+    // Añade un comentario al post
     const onComment = async () => {
         const trimmedComment = comment.current.value.trim();
 
@@ -56,6 +58,7 @@ export default function Post({ post, posts, setPosts, token, userId }) {
         comment.current.value = "";
     };
 
+    // Elimina el post
     const onDeletePost = async () => {
         try {
             await axios.delete(`http://localhost:3000/post/deletePost/${post._id}`, {

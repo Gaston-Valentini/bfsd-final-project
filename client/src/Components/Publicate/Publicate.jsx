@@ -1,5 +1,5 @@
 import style from "./Publicate.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { FaRegImage } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa";
@@ -8,6 +8,7 @@ export default function Publicate({ user, setPosts, token }) {
     const [post, setPost] = useState({});
     const [image, setImage] = useState({});
 
+    // Actualiza el estado del post
     const onInput = (e, name) => {
         setPost((prevState) => ({
             ...prevState,
@@ -15,6 +16,7 @@ export default function Publicate({ user, setPosts, token }) {
         }));
     };
 
+    // Sube la imagen al servidor y la almacena en el estado del usuario
     const uploadImage = async () => {
         const formData = new FormData();
         formData.append("file", image);
@@ -25,6 +27,7 @@ export default function Publicate({ user, setPosts, token }) {
         post.image = res.data.secure_url;
     };
 
+    // Actualiza el usuario
     const onSave = async () => {
         if (post.content && post.image) {
             const res = await axios.post("http://localhost:3000/post/createPost", post, {

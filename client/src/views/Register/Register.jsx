@@ -1,6 +1,6 @@
 import style from "./Register.module.css";
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { validateField } from "../../validations/validateField";
 
@@ -11,6 +11,7 @@ export default function Register() {
     const [terms, setTerms] = useState(false);
     const [message, setMessage] = useState("");
 
+    // Actualiza el estado con la información del usuario para un campo y actualiza el estado de errores para ese campo en caso de que existan
     const onInput = (e) => {
         const { name, value } = e.target;
 
@@ -27,6 +28,7 @@ export default function Register() {
         }));
     };
 
+    // Comprueba que los terminos y condiciones hayan sido aceptadas
     const onTerms = () => {
         if (terms === false) {
             setErrors((prevState) => ({
@@ -43,6 +45,7 @@ export default function Register() {
         }
     };
 
+    // Si todos los campos están completos y no hay errores registra al usuario y navega a la vista Home
     const onSubmit = async () => {
         if (Object.values(errors).every((error) => !error) && Object.keys(data).length === 6 && terms === true) {
             try {

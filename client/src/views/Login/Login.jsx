@@ -1,6 +1,6 @@
 import style from "./Login.module.css";
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { validateField } from "../../validations/validateField";
 
@@ -10,6 +10,7 @@ export default function Login() {
     const [errors, setErrors] = useState({});
     const [message, setMessage] = useState("");
 
+    // Actualiza el estado con la información del usuario para un campo y actualiza el estado de errores para ese campo en caso de que existan
     const onInput = (e) => {
         const { name, value } = e.target;
 
@@ -18,6 +19,7 @@ export default function Login() {
             [name]: value,
         }));
 
+        // Comprueba que el campo sea válido
         const isValid = validateField(name, value, data);
 
         setErrors((prevState) => ({
@@ -26,6 +28,7 @@ export default function Login() {
         }));
     };
 
+    // Si todos los campos están completos y no hay errores intenta iniciar sesión y navega a la vista Home
     const onSubmit = async () => {
         if (Object.values(errors).every((error) => !error) && Object.keys(data).length === 2) {
             try {

@@ -1,12 +1,21 @@
 import style from "./Comment.module.css";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaTrashAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 export default function Comment({ comment, post, commentLength, setCommentLength, setCommentsState, userId, token }) {
     const [user, setUser] = useState({});
 
+    // Obtiene la información del usuario que ha hecho la publicaciónS
+    const getUser = async () => {
+        const res = await axios.get(`http://localhost:3000/user/getUserById/${comment.user}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(res.data.userFound);
+    };
+
+    // Elimina el comentario
     const onDelete = async () => {
         const res = await axios.delete(`http://localhost:3000/post/deleteComment/${post._id}/${comment._id}`, {
             headers: { Authorization: `Bearer ${token}` },
@@ -16,13 +25,6 @@ export default function Comment({ comment, post, commentLength, setCommentLength
     };
 
     useEffect(() => {
-        const getUser = async () => {
-            const res = await axios.get(`http://localhost:3000/user/getUserById/${comment.user}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            setUser(res.data.userFound);
-        };
-
         getUser();
     }, []);
 

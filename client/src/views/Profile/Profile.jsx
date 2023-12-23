@@ -10,7 +10,6 @@ import { isAuthenticated } from "../../functions/isAuthenticated";
 export default function Profile() {
     const navigate = useNavigate();
     const [token, setToken] = useState("");
-    const [bio, setBio] = useState(0);
     const [user, setUser] = useState({
         name: "",
         surname: "",
@@ -24,13 +23,32 @@ export default function Profile() {
         following: [],
         followers: [],
     });
+    const [bio, setBio] = useState(0);
     const [image, setImage] = useState("");
     const [posts, setPosts] = useState([]);
 
+    // Obtiene los datos del usuario que ha iniciado sesión
+    const getUserData = async () => {
+        const res = await axios.get("http://localhost:3000/user/getUser", {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(res.data.userFound);
+    };
+
+    // Obtiene las publicaciones del usuario que ha iniciado sesión
+    const getUserPosts = async () => {
+        const res = await axios.get("http://localhost:3000/post/getUserPosts", {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        setPosts(res.data.posts);
+    };
+
+    // Cambia el estado del número de caracteres en el textarea de bio
     const onBio = (e) => {
         setBio(e.target.value.length);
     };
 
+    // Actualiza el estado con la información del usuario
     const onInput = (e, name) => {
         setUser((prevState) => ({
             ...prevState,
@@ -38,6 +56,7 @@ export default function Profile() {
         }));
     };
 
+    // Sube la imagen al servidor y la almacena en el estado del usuario
     const uploadImage = async () => {
         const formData = new FormData();
         formData.append("file", image);
@@ -48,6 +67,7 @@ export default function Profile() {
         user.image = res.data.secure_url;
     };
 
+    // Actualiza el usuario
     const onSave = async () => {
         await axios.put("http://localhost:3000/user/updateUser", user, {
             headers: { Authorization: `Bearer ${token}` },
@@ -57,19 +77,6 @@ export default function Profile() {
 
     useEffect(() => {
         setToken(localStorage.getItem("token"));
-        const getUserData = async () => {
-            const res = await axios.get("http://localhost:3000/user/getUser", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            setUser(res.data.userFound);
-        };
-
-        const getUserPosts = async () => {
-            const res = await axios.get("http://localhost:3000/post/getUserPosts", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            setPosts(res.data.posts);
-        };
 
         getUserData();
         getUserPosts();

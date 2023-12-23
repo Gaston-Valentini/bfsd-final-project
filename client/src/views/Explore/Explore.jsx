@@ -7,6 +7,7 @@ import { RiUserFollowFill, RiUserUnfollowFill } from "react-icons/ri";
 import { isAuthenticated } from "../../functions/isAuthenticated.js";
 
 export default function Explore() {
+    const navigate = useNavigate();
     const [token, setToken] = useState("");
     const [user, setUser] = useState({});
     const [users, setUsers] = useState([]);
@@ -14,8 +15,8 @@ export default function Explore() {
     const [dateSort, setDateSort] = useState(true);
     const [alphabetSort, setAlphabetSort] = useState(false);
     const [followersSort, setFollowersSort] = useState(false);
-    const navigate = useNavigate();
 
+    // Obtiene la información del usuario que ha iniciado sesión
     const getUserData = async () => {
         const res = await axios.get("http://localhost:3000/user/getUser", {
             headers: { Authorization: `Bearer ${token}` },
@@ -23,6 +24,7 @@ export default function Explore() {
         setUser(res.data.userFound);
     };
 
+    // Obtiene la información de los usarios registrados en la aplicación
     const getAllUsers = async () => {
         const res = await axios.get("http://localhost:3000/user/getAllUsers", {
             headers: { Authorization: `Bearer ${token}` },
@@ -31,18 +33,14 @@ export default function Explore() {
         setUsers(filteredUsers);
     };
 
+    // Comprueba si el usuario que ha iniciado sesión sigue o no a un usuario y retorna un valor booleano
     const isUserFollowing = (userId) => {
         return (
             user && user.following && user.following.some((follower) => follower.user.toString() === userId.toString())
         );
     };
 
-    const handleSearch = (e) => {
-        setSearch(e.target.value);
-    };
-
-    const filteredUsers = users.filter((user) => user?.nickname?.toLowerCase().includes(search.toLowerCase()));
-
+    // Agrega un usuario a los seguidores del usuario que ha iniciado sesión
     const onFollow = async (targetUser) => {
         const res = await axios.put(
             `http://localhost:3000/user/follow/${targetUser._id}`,
@@ -60,6 +58,7 @@ export default function Explore() {
         });
     };
 
+    // Agrega un usuario a los seguidores del usuario que ha iniciado sesión
     const onUnfollow = async (targetUser) => {
         const res = await axios.put(
             `http://localhost:3000/user/unfollow/${targetUser._id}`,
@@ -77,6 +76,7 @@ export default function Explore() {
         });
     };
 
+    // Ordena la lista de usuarios registrados en la aplicación
     const onSort = (e) => {
         switch (e.target.name) {
             case "date":
@@ -131,14 +131,22 @@ export default function Explore() {
         }
     };
 
+    // Actualiza el estado que contiene el valor de la barra de búsqueda
+    const handleSearch = (e) => {
+        setSearch(e.target.value);
+    };
+
+    // Almacena los usuarios que coinciden con la búsqueda
+    const filteredUsers = users.filter((user) => user?.nickname?.toLowerCase().includes(search.toLowerCase()));
+
     useEffect(() => {
         if (!isAuthenticated()) {
             navigate("/login");
         }
+        setToken(localStorage.getItem("token"));
     }, []);
 
     useEffect(() => {
-        setToken(localStorage.getItem("token"));
         getUserData();
     }, [token]);
 

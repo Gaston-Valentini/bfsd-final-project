@@ -1,10 +1,10 @@
 import style from "./User.module.css";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import UserCard from "../../components/UserCard/UserCard";
 import Post from "../../components/Post/Post";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
 import Friendlist from "../../components/Friendlist/Friendlist";
 import { isAuthenticated } from "../../functions/isAuthenticated";
 
@@ -28,10 +28,7 @@ export default function User() {
     const { id } = useParams();
     const [posts, setPosts] = useState([]);
 
-    const getToken = async () => {
-        setToken(localStorage.getItem("token"));
-    };
-
+    // Obtiene los datos del usuario que ha iniciado sesión
     const getUserLogged = async () => {
         const res = await axios.get(`http://localhost:3000/user/getUser`, {
             headers: { Authorization: `Bearer ${token}` },
@@ -39,6 +36,7 @@ export default function User() {
         setUserLogged(res.data.userFound);
     };
 
+    // Obtiene la información del usuario dueño del perfil
     const getUserById = async () => {
         const res = await axios.get(`http://localhost:3000/user/getUserById/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
@@ -46,6 +44,7 @@ export default function User() {
         setUser(res.data.userFound);
     };
 
+    // Obtiene los posts del usuario dueño del perfil
     const getUserPostsById = async () => {
         const res = await axios.get(`http://localhost:3000/post/getUserPostsById/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
@@ -57,10 +56,10 @@ export default function User() {
         if (!isAuthenticated()) {
             navigate("/login");
         }
-        getToken();
     }, []);
 
     useEffect(() => {
+        setToken(localStorage.getItem("token"));
         getUserById();
         getUserLogged();
     }, [id, token]);
