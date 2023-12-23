@@ -126,6 +126,20 @@
     background-color: var(--green);
 }
 
+@media (max-width: 835px) {
+    .container {
+        padding: 50px 10px 10px;
+        gap: 20px;
+    }
+    .sortsList {
+        gap: 10px;
+    }
+
+    .users {
+        gap: 10px;
+    }
+}
+
 @media (max-width: 450px) {
     .sortsList {
         flex-direction: column;

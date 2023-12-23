@@ -3,3 +3,9 @@
     font-size: 13px;
     font-family: "Montserrat", sans-serif;
 }
+
+@media (max-width: 835px) {
+    * {
+        font-size: 11px;
+    }
+}

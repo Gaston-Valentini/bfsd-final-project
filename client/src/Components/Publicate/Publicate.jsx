@@ -49,10 +49,14 @@ export default function Publicate({ user, setPosts, token }) {
             <hr></hr>
             <div className={style.containerImage}>
                 <div className={style.containerImageFile}>
-                    <FaRegImage />
+                    <label htmlFor="imageInput" className={style.containerImageFileCustom}>
+                        <FaRegImage />
+                        Seleccionar imagen
+                    </label>
                     <input
-                        className={style.containerImageSubmitFile}
                         type="file"
+                        id="imageInput"
+                        className={style.containerImageFileHidden}
                         onChange={(e) => setImage(e.target.files[0])}
                     />
                 </div>

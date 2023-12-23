@@ -24,3 +24,23 @@
     background-color: white;
     border-radius: 10px;
 }
+
+@media (max-width: 1250px) {
+    .profile {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 835px) {
+    .profile {
+        padding: 50px 10px 10px;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .profilePosts {
+        gap: 10px;
+    }
+    .profilePostsTitle {
+        font-size: 13px;
+    }
+}

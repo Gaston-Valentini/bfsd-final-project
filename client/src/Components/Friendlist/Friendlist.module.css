@@ -57,3 +57,15 @@
     font-weight: 800;
     color: black;
 }
+
+@media (max-width: 835px) {
+    .container {
+        gap: 10px;
+    }
+    .containerSection {
+        gap: 10px;
+    }
+    .containerSectionTitle {
+        font-size: 13px;
+    }
+}
