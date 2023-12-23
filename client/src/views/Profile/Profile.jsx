@@ -5,6 +5,7 @@ import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import Post from "../../components/Post/Post";
 import Friendlist from "../../components/Friendlist/Friendlist";
+import { isAuthenticated } from "../../functions/isAuthenticated";
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -73,6 +74,12 @@ export default function Profile() {
         getUserData();
         getUserPosts();
     }, [token]);
+
+    useEffect(() => {
+        if (!isAuthenticated()) {
+            navigate("/login");
+        }
+    }, []);
 
     const reversePosts = [...posts].reverse();
 

@@ -4,10 +4,12 @@ import UserCard from "../../components/UserCard/UserCard";
 import Post from "../../components/Post/Post";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Friendlist from "../../components/Friendlist/Friendlist";
+import { isAuthenticated } from "../../functions/isAuthenticated";
 
 export default function User() {
+    const navigate = useNavigate();
     const [token, setToken] = useState("");
     const [user, setUser] = useState({
         name: "",
@@ -52,6 +54,9 @@ export default function User() {
     };
 
     useEffect(() => {
+        if (!isAuthenticated()) {
+            navigate("/login");
+        }
         getToken();
     }, []);
 

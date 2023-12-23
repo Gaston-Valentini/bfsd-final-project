@@ -1,9 +1,10 @@
 import style from "./Explore.module.css";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import { RiUserFollowFill, RiUserUnfollowFill } from "react-icons/ri";
+import { isAuthenticated } from "../../functions/isAuthenticated.js";
 
 export default function Explore() {
     const [token, setToken] = useState("");
@@ -13,6 +14,7 @@ export default function Explore() {
     const [dateSort, setDateSort] = useState(true);
     const [alphabetSort, setAlphabetSort] = useState(false);
     const [followersSort, setFollowersSort] = useState(false);
+    const navigate = useNavigate();
 
     const getUserData = async () => {
         const res = await axios.get("http://localhost:3000/user/getUser", {
@@ -128,6 +130,12 @@ export default function Explore() {
                 break;
         }
     };
+
+    useEffect(() => {
+        if (!isAuthenticated()) {
+            navigate("/login");
+        }
+    }, []);
 
     useEffect(() => {
         setToken(localStorage.getItem("token"));

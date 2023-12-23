@@ -1,15 +1,18 @@
 import style from "./Home.module.css";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import UserCard from "../../components/UserCard/UserCard";
 import Publicate from "../../components/Publicate/Publicate";
 import Post from "../../components/Post/Post";
+import { isAuthenticated } from "../../functions/isAuthenticated.js";
 
 export default function Home() {
     const [token, setToken] = useState("");
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setToken(localStorage.getItem("token"));
@@ -30,6 +33,12 @@ export default function Home() {
         getUserData();
         getAllPosts();
     }, [token]);
+
+    useEffect(() => {
+        if (!isAuthenticated()) {
+            navigate("/login");
+        }
+    }, []);
 
     const reversePosts = [...posts].reverse();
 
