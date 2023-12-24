@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import Post from "../models/Post.js";
 
 const getUser = async (req, res) => {
     try {
@@ -62,6 +63,31 @@ const updateUser = async (req, res) => {
     }
 };
 
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const userToDelete = await User.findById(id);
+
+        await Promise.all([User.findByIdAndDelete(id), Post.deleteMany({ user: id })]);
+
+        await User.updateMany({ "following.user": id }, { $pull: { following: { user: id } } });
+
+        await User.updateMany({ "followers.user": id }, { $pull: { followers: { user: id } } });
+
+        await User.updateMany(
+            { "followers.user": { $in: userToDelete.followers.map((f) => f.user) } },
+            { $pull: { followers: { user: id } } }
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: "Usuario eliminado y referencias actualizadas.",
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
 const follow = async (req, res) => {
     try {
         const { id } = req.user;
@@ -108,4 +134,4 @@ const unfollow = async (req, res) => {
     }
 };
 
-export { getUser, getUserById, getAllUsers, updateUser, follow, unfollow };
+export { getUser, getUserById, getAllUsers, updateUser, deleteUser, follow, unfollow };
