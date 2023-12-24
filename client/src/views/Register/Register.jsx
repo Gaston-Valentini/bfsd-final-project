@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { validateField } from "../../validations/validateField";
+import { jwtDecode } from "jwt-decode";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -53,7 +54,12 @@ export default function Register() {
                 setMessage(res.data.message);
                 localStorage.setItem("token", res.data.token);
                 setTimeout(() => {
-                    navigate("/home");
+                    const decode = jwtDecode(res.data.token);
+                    if (decode.role === "admin") {
+                        navigate("/admin");
+                    } else {
+                        navigate("/home");
+                    }
                 }, 2000);
             } catch (error) {
                 setErrors({

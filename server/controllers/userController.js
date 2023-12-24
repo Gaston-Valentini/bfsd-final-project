@@ -63,6 +63,21 @@ const updateUser = async (req, res) => {
     }
 };
 
+const updateUserById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await User.findByIdAndUpdate(id, req.body);
+
+        return res.status(200).json({
+            success: true,
+            message: "Datos del usuario actualizados.",
+        });
+    } catch (error) {
+        throw new Error(`Error interno del servidor: ${error}`);
+    }
+};
+
 const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
@@ -134,4 +149,4 @@ const unfollow = async (req, res) => {
     }
 };
 
-export { getUser, getUserById, getAllUsers, updateUser, deleteUser, follow, unfollow };
+export { getUser, getUserById, getAllUsers, updateUser, updateUserById, deleteUser, follow, unfollow };

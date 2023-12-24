@@ -40,6 +40,15 @@
     background-color: var(--grey);
 }
 
+.containerPreview {
+    width: 100%;
+}
+
+.containerPreview img {
+    width: 100%;
+    border-radius: 10px;
+}
+
 hr {
     border: 1px solid var(--grey);
 }

@@ -29,7 +29,7 @@ export default function Explore() {
         const res = await axios.get("http://localhost:3000/user/getAllUsers", {
             headers: { Authorization: `Bearer ${token}` },
         });
-        const filteredUsers = res.data.users.filter((e) => e._id !== user._id);
+        const filteredUsers = res.data.users.filter((e) => e._id !== user._id && e.role !== "admin");
         setUsers(filteredUsers);
     };
 
@@ -56,6 +56,7 @@ export default function Explore() {
             );
             return updatedUsers;
         });
+        getAllUsers();
     };
 
     // Agrega un usuario a los seguidores del usuario que ha iniciado sesión
@@ -74,6 +75,7 @@ export default function Explore() {
             );
             return updatedUsers;
         });
+        getAllUsers();
     };
 
     // Ordena la lista de usuarios registrados en la aplicación
@@ -148,6 +150,7 @@ export default function Explore() {
 
     useEffect(() => {
         getUserData();
+        getAllUsers();
     }, [token]);
 
     useEffect(() => {

@@ -1,0 +1,100 @@
+.container {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--lightGrey);
+}
+
+.containerHeader {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.containerHeaderTitle {
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--green);
+    background-color: white;
+    border-radius: 10px;
+}
+
+.containerHeaderLogout {
+    padding: 10px;
+    font-weight: 800;
+    color: white;
+    background-color: var(--red);
+    border-radius: 10px;
+}
+.containerHeaderLogout:hover {
+    cursor: pointer;
+    background-color: var(--lightRed);
+}
+
+.containerUsersTable {
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.containerUsersTable thead th {
+    padding: 5px;
+    background-color: var(--grey);
+    border: none;
+    border-radius: 5px;
+}
+
+.containerUsersTable tbody tr td input {
+    width: calc(100% - 10px);
+    padding: 5px;
+    background-color: var(--lightGrey);
+    border: none;
+    border-radius: 5px;
+}
+
+.containerUsersTable tbody tr td input:focus {
+    background-color: var(--grey);
+    outline: none;
+}
+
+.containerUsersTable tbody tr td select {
+    width: calc(100%);
+    padding: 5px;
+    background-color: var(--lightGrey);
+    border: none;
+    border-radius: 5px;
+}
+
+.save {
+    padding: 5px;
+    font-weight: 800;
+    background-color: var(--green);
+    border-radius: 5px;
+}
+.save:hover {
+    cursor: pointer;
+    background-color: var(--lightGreen);
+}
+
+.delete {
+    padding: 5px;
+    font-weight: 800;
+    color: white;
+    background-color: var(--red);
+    border-radius: 5px;
+}
+.delete:hover {
+    cursor: pointer;
+    background-color: var(--lightRed);
+}
+
+.containerUsersTable thead th,
+.containerUsersTable tbody tr td div,
+.containerUsersTable tbody tr td select,
+.containerUsersTable tbody tr td input {
+    font-size: 11px;
+}

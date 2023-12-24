@@ -2,6 +2,7 @@ import style from "./Login.module.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import { validateField } from "../../validations/validateField";
 
 export default function Login() {
@@ -36,7 +37,12 @@ export default function Login() {
                 setMessage(res.data.message);
                 localStorage.setItem("token", res.data.token);
                 setTimeout(() => {
-                    navigate("/home");
+                    const decode = jwtDecode(res.data.token);
+                    if (decode.role === "admin") {
+                        navigate("/admin");
+                    } else {
+                        navigate("/home");
+                    }
                 }, 2000);
             } catch (error) {
                 if (error.response.data.message === "Contraseña incorrecta") {

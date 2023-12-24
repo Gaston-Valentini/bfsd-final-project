@@ -1,12 +1,13 @@
 import style from "./Publicate.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaRegImage } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa";
 
-export default function Publicate({ user, setPosts, token }) {
+export default function Publicate({ user, setPosts, token, getAllPosts }) {
     const [post, setPost] = useState({});
     const [image, setImage] = useState({});
+    const [imagePreview, setImagePreview] = useState("");
 
     // Actualiza el estado del post
     const onInput = (e, name) => {
@@ -25,6 +26,7 @@ export default function Publicate({ user, setPosts, token }) {
 
         const res = await axios.post("https://api.cloudinary.com/v1_1/dmltmuab5/image/upload", formData);
         post.image = res.data.secure_url;
+        setImagePreview(res.data.secure_url);
     };
 
     // Actualiza el usuario
@@ -35,7 +37,12 @@ export default function Publicate({ user, setPosts, token }) {
             });
             setPosts((prevState) => [...prevState, res.data.post]);
         }
+        getAllPosts();
     };
+
+    useEffect(() => {
+        uploadImage();
+    }, [image]);
 
     return (
         <div className={style.container}>
@@ -49,6 +56,7 @@ export default function Publicate({ user, setPosts, token }) {
                     onChange={(e) => onInput(e, "content")}
                 ></input>
             </div>
+            <div className={style.containerPreview}>{imagePreview !== "" ? <img src={imagePreview} /> : ""}</div>
             <hr></hr>
             <div className={style.containerImage}>
                 <div className={style.containerImageFile}>
