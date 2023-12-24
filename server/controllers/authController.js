@@ -26,7 +26,9 @@ const register = async (req, res) => {
             password: hashedPassword,
         });
 
-        const token = jwt.sign({ id: userRegistered._id }, app.get("TOKEN_SECRET"), { expiresIn: "24h" });
+        const token = jwt.sign({ id: userRegistered._id, role: userRegistered.role }, app.get("TOKEN_SECRET"), {
+            expiresIn: "24h",
+        });
 
         return res.status(201).json({
             success: true,
@@ -60,7 +62,9 @@ const login = async (req, res) => {
             });
         }
 
-        const token = jwt.sign({ id: userFound._id }, app.get("TOKEN_SECRET"), { expiresIn: "24h" });
+        const token = jwt.sign({ id: userFound._id, role: userFound.role }, app.get("TOKEN_SECRET"), {
+            expiresIn: "24h",
+        });
 
         return res.status(200).json({
             success: true,

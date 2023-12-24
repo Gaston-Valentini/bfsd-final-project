@@ -6,6 +6,7 @@ import Home from "./views/Home/Home";
 import Explore from "./views/Explore/Explore";
 import Profile from "./views/Profile/Profile";
 import User from "./views/User/User";
+import Admin from "./views/Admin/Admin";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/explore" element={<Explore />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/user/:id" element={<User />} />
+                <Route path="/admin" element={<Admin />} />
                 <Route path="*" element={<Login />} />
             </Routes>
         </Router>
