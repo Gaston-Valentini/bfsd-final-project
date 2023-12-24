@@ -2,8 +2,6 @@
 
 **<p align="center">Proyecto Final - GeeksHubs Academy</p>**
 
-**<p align="center">Aplicación en Producción</p>**
-
 <p align="center">Aplicación Full-Stack SPORTSYNC - Gastón Valentini.
 
 <p>
@@ -188,7 +186,7 @@ Este proyecto se ha desarrollado en 2 ramas:
 
 ## Deploy
 
-El despliegue del cliente ha sido realizado en AWS, la base de datos está almacenada en el servicio que brinda MongoDB Atlas.
+El despliegue del cliente ha sido realizado en AWS en el siguiente enlace `https://master.d17qt1rosnp2dw.amplifyapp.com`, la base de datos está almacenada en el servicio que brinda MongoDB Atlas en el siguiente enlace `https://cloud.mongodb.com/v2/653a2159addf585f0c259d57#/metrics/replicaSet/656cc438c12df0350d7897e6/explorer/bfsd-final-project`.
 
 ## Cómo Contribuir
 
